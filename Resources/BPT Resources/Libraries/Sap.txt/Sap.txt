@@ -1,0 +1,1753 @@
+'********************************************************************************
+'       Sap Functions
+'       -------------------------
+'
+'   Available Functions:
+' * ---------------------------------------
+' *
+' * - ActivateForWindow - Makes Activate the default method for SAPGuiWindow.
+' *
+' * - SelectMenuForToolbar - Selects an item from the toolbar. The toolbar can be
+' *                                        independent or residing in a grid.
+' *
+' * - ExtendNodeSelectionForTree - Extends the node selection in a tree.
+' *
+' * - SelectItemForTree - Selects or clicks an item in a tree. The item can be a
+' *                                        regular item, a link, or a button.
+' * - SelectColumnForTree - Selects a column in a tree.
+' *
+' * - SelectCellForGrid - Selects a cell in a grid (If it is a check box, it checks
+' *                                        it; if it is a button, it clicks it.)
+' *
+' * - SelectCellForTable - Selects or clicks a table cell.
+' *
+' * - SelectMenuForWindow - Clicks an item in the window's menu bar.
+' *
+' * - RightClickRowForGrid - Clicks an item in the row context menu.
+' *
+' * - RightClickCellForGrid - Clicks an item in the cell context menu.
+' *
+' * - RightClickColumnForGrid - Clicks an item in the column context menu.
+' *
+' * - OpenCellEntriesList - Opens a cell's list of possible entries.
+' *
+' * - SetCellDate - Sets a date in a table cell.
+' *
+' * - FindRowByTextInCell - Returns the first row in the specified column in which a cell
+' *                                        contains the specified text.
+' *                                        Start the search from the specified row.
+' *
+' * - GetColumnsNum - Returns the number of columns in the table.
+' *
+' * - GetRowsNum - Returns the number of rows in the table.
+' *
+' * - PressEnter - Presses the Enter key on the keyboard.
+' *
+' * - SelectAll - Selects all columns in the table.
+' *
+' * - RightClickColumn - Opens the tree column's context menu and clicks an element.
+' *
+' * - RightClickTree - Opens the tree's context menu and clicks an element.
+' *
+' * - RightClickNode - Opens the node's context menu and clicks an element.
+' *
+' * - RightClickItem - Opens the item's context menu and clicks an element.
+' *
+' * - SelectForCombo - Selects an item from the list of options (by index or by key).
+' *
+' * - SetProtected - Sets text between protected areas of a text area object.
+' *
+' * - SelectForLabel - Selects a label.
+' *
+' * - DoubleClickForLabel - Double-clicks a label object.
+' *
+' * - ClickToolbarButton - Clicks a toolbar button. The toolbar may be independent or
+' *                                        residing in a grid.
+' *
+' * - SetDateRangeForCalendar - Sets the specified date range (can also be a relative date).
+' *
+' * - GetText - Retrieves the "Text" run-time attribute.
+' *
+' * - SAPGuiCloseConnections - Closes all SAP open connections.
+' *
+' * - SAPGuiLaunchAndLogon - Creates and logs on to a new SAP Gui Session.
+' *
+' * - SetRelativeDate - Retrieves today's date and adds the specified number of days.
+' *                                        Set the date to the new date.
+' *
+' * - SetCurrentYear - Sets the current year.
+' *
+' * - SetDateForCalendar - Sets the date in the calendar. The date could be a representing a date
+' *					   or in the format of Today + <Relative>.
+' *
+' * - StartTransaction - Starts a new SAP Gui session with the specified transaction.
+' *
+' * - VerifySelected - Verifies that the object's Selected property has the expected
+' *                                        value. Used by VerifyValue of SAPGuiCheckBox
+' *                                        and SAPGuiRadioButton.
+' *
+' * - VerifyText - Verifies that the object's Text property has the expected value.
+' *                                        Used by VerifyValue of SAPGuiTextArea.
+' *
+' * - VerifyChecked - Verifies that the object's checked property has the expected value.
+' *                                        Used by VerifyValue of SAPCheckBox.
+' *
+' * - VerifySelectedItem - Verifies that the object's SelectedItem property has the expected value.
+' *                                        Used by VerifyValue of SAPGuiTabStrip.
+' *
+' * - VerifySelectedDate - Verifies that the object's SelectedDate property has the expected value.
+' *                                        Used by VerifyValue of SAPGuiCalendar.
+' *
+' * - GetSelectedItemProperty - Returns the value of the object's SelectedItem property.
+' *                                        Used by GetValue of SAPGuiTabStrip.
+' *
+' * - GetSelectedDateProperty - Returns the value of the object's SelectedDate property.
+' *                                        Used by the GetValue of SAPGuiCalendar.
+' *
+' *
+' * - PressKey - Presses the specified keyboard button (enables the use of strings,
+' *                                        such as "enter", "f1", and so forth).
+' *                                        Used by SAPGuiWindow.
+' *
+' * - FillRecordByRow - Fills a record in a table, in a given row. The record data is provided as 
+' *                                        a stream of values.
+' *
+' * - FillRecordByColumnName - Fills a record in the table, in the given row. The record is a stream of 
+' *					   pairs of column name and value.
+'********************************************************************************
+'   Version: QuickTest Professional Add-in for SAP Solutions 8.2 December 2004
+'   ** In order to use the functions in this file, you must also load the "Common.txt" function library file.
+'	** In order for the date related functions to work, the user locale in the General tab of Regional Options
+'						should be set to "English(United States)".
+'   ** Do not modify this file. It may be automatically updated by a later version, and then you will lose your changes.
+'********************************************************************************
+' Function ActivateForWindow
+' --------------------------
+'This method makes Activate the default method for SAPGuiWindow.
+'@Description Activates the SAPGuiWindow.
+'@Documentation Activate the <Test object name> <Test object type>.
+Sub ActivateForWindow(obj)
+        obj.Activate
+End Sub
+
+' Function SelectMenuForToolbar
+' -----------------------------
+'This method clicks a toolbar menu item. The path includes the button and the menu path.
+'IMPORTANT: The toolbar may be independent or residing within a grid. If it is independent, the toolbar
+'SAP object can use the actual path of the menu items as displayed in the application. If it is within a grid, the SAP object is GridView (even though
+'it is recorded as toolbar). The GridView object does not support using the textual path, so you must specify the item ID instead.
+' Parameter:
+'       Path - the path to the menu item (textual path or ID)
+'@Description Selects a toolbar menu item.
+'@Documentation Select the <Path> menu item from the <Test object name> <Test object type>.
+Sub SelectMenuForToolbar(obj, Path)
+   On Error Resume Next
+   'check whether this is an independent toolbar or is located within a grid
+   If StrComp(obj.object.subType, "GridView", 1) = 0 Then
+           SelectGridToolbarMenuItem obj, Path
+           Exit Sub
+   End If
+   If StrComp(obj.object.subType, "Toolbar", 1) = 0 Then
+           SelectIndependentToolbarMenuItem obj, Path
+           Exit Sub
+   End If
+    If Err.Number <> 0 Then
+          MsgBox Err.Description
+    End If
+End Sub
+
+' Function ExtendNodeSelectionForTree
+' -----------------------------------
+' Extends the node selection in a tree.
+' Parameter:
+'       Path - the node path (string or index).
+'@Description Extends the node selection in a tree.
+'@Documentation Extend the <Path> node selection in the <Test object name> <Test object type>.
+Sub ExtendNodeSelectionForTree(obj, Path)
+   obj.ExtendNode Path
+End Sub
+
+' Function SelectColumnForTree
+' ----------------------------
+' Select a column in a tree.
+' Parameter:
+'       Column  - the column to select. Either the title or the index.
+'@Description Selects a column in a tree.
+'@Documentation Select the <Column> column in the <Test object name> <Test object type>.
+Sub SelectColumnForTree(obj, Column)
+   obj.ClickColumn Column
+End Sub
+
+' Function SelectItemForTree
+' ----------------------------
+' Select or click an item in a tree. Item can be normal/link/button.
+' Parameters:
+'       NodePath - path to the tree node (string or index).
+'       Item - item in the node (string or index).
+'@Description Selects or clicks an item in a tree.
+'@Documentation Select or click an the <Item> item in the <NodePath> node in the <Test object name> <Test object type>.
+Sub SelectItemForTree(obj, NodePath, Item)
+   On Error Resume Next
+   Dim ob, nodescol, subnodes, Nodekey
+   Nodekey = Null
+   Set ob = obj.object
+   Set nodescol = ob.GetNodesCol
+   ind = 0
+   'expand the node - take only the parents of the node by removing the right most element from NodePath
+   If InStr(NodePath, ";") > 0 Then
+			obj.Expand Left(NodePath, InStrRev(NodePath, ";", Len(NodePath), 1)-1)
+			If Err.Number <> 0 Then
+					MsgBox Err.Description
+					Exit Sub
+			End If
+   End If 
+   'get the node path key
+   While NodePath <> ""
+           bFound = False
+           current = ExtractFirst(NodePath)
+           'is it an index?
+           If InStr(1, current, "#", 1) > 0 Then
+                   nodeindex = Right(current, Len(current) - 1)
+                   If CInt(nodeindex) < 1 Or CInt(nodeindex) > nodescol.Count Then
+                           MsgBox "node index not valid: " & CInt(nodeindex)
+                           Exit Sub
+                   End If
+                   Nodekey = nodescol.elementat(CInt(nodeindex) - 1)
+           Else
+                   For Each Node In nodescol
+                           If StrComp(current, ob.GetNodeTextByKey(Node)) = 0 Then
+                                   'found the current node
+                                   bFound = True
+                                   Set nodescol = ob.GetSubNodesCol(Node)
+                                   Nodekey = Node
+                                   Exit For
+                           End If
+                   Next
+                   If bFound = False Then
+                           MsgBox "could not find the node: " & current
+                           Exit Sub
+                   End If
+           End If
+   Wend
+   'did we find the node?
+   If IsNull(Nodekey) Then
+           Exit Sub
+   End If
+
+   'get the item key
+   itemkey = GetTreeItemKey(ob, Nodekey, Item)
+   If itemkey = -1 Then
+           MsgBox "could not find the item: " & Item
+           Exit Sub
+   End If
+   If Err.Number <> 0 Then
+           MsgBox Err.Description
+   End If
+        'get the type of the item
+        itemtype = ob.GetItemType(Nodekey, itemkey)
+   If Err.Number <> 0 Then
+           MsgBox Err.Description
+   End If
+        If itemtype = 1 Or itemtype = 2 Then
+                ob.selectItem Nodekey, itemkey
+        End If
+        If itemtype = 4 Then    'button
+                ob.selectItem Nodekey, itemkey
+                ob.pressButton Nodekey, itemkey
+        End If
+        If itemtype = 5 Then ' link
+                ob.selectItem Nodekey, itemkey
+                ob.clickLink Nodekey, itemkey
+        End If
+   If Err.Number <> 0 Then
+           MsgBox Err.Description
+   End If
+End Sub
+
+' Function SelectCellForGrid
+' --------------------------
+' Select or click a cell in a grid.
+' Parameters:
+'       Row - row number.
+'       Column - column name or index.
+'@Description Selects or click a cell in a grid.
+'@Documentation Select or click the cell located in row <Row>, column <Column>, in the <Test object name> <Test object type>.
+Sub SelectCellForGrid(obj, Row, Column)
+   On Error Resume Next
+   Dim ob, allCols, titles
+   Set ob = obj.object
+   colIndex = Null
+   '1. Turn the cell into the current cell
+   'check the row
+   If Row - 1 > ob.RowCount Or Row - 1 < 0 Then
+           MsgBox "invalid row argument"
+   End If
+   'get the column. Can be an index type ("#n") or the title of the column
+   Set allCols = ob.ColumnOrder 'get all the columns
+   pos = InStr(1, Column, "#", 1)
+   If pos > 0 Then
+           colIndex = Right(Column, Len(Column) - 1)
+       If CInt(colIndex) < 0 Or CInt(colIndex) > allCols.Count Then
+                   MsgBox "column index not valid: " & Column
+                   Exit Sub
+           End If
+           'get the column title
+           colTitle = allCols.elementat(CInt(colIndex) - 1)
+   Else
+       indx = 0
+           For Each col In allCols
+                   'get the current column titles
+                   Set titles = ob.GetColumnTitles(col)
+           'get the longest title
+                   titleLen = 0
+                   For Each Title In titles
+               If Len(Title) > titleLen Then
+                                   titleLen = Len(Title)
+                                   longestTitle = Title
+                           End If
+                   Next
+                   'compare with the column name given
+                   If StrComp(longestTitle, Column, 1) = 0 Then
+                           colIndex = indx
+                           colTitle = col
+                           Exit For
+                   End If
+                   indx = indx + 1
+           Next
+   End If
+   'make sure we get a good column index
+   If IsNull(colIndex) Then
+           MsgBox "could not find the column: " & Column
+           Exit Sub
+   End If
+
+   'by now we have the coordinates of the cell
+   ob.SetCurrentCell Row - 1, colTitle
+        If Err.Number <> 0 Then
+                   MsgBox Err.Description
+   End If
+   '2. Check its type and perform the required action (check box/button/regular cell)
+   cellType = ob.GetCellType(Row - 1, colTitle)
+   If StrComp(cellType, "Button", 1) = 0 Then
+           ob.pressButtonCurrentCell
+         else if strcomp(cellType, "CheckBox",1)=0 then
+           ob.ClickCurrentCell
+         End If
+   End If
+        If Err.Number <> 0 Then
+                   MsgBox Err.Description
+   End If
+End Sub
+
+' Function SelectCellForTable
+' ---------------------------
+' Select or click a cell in a table.
+' Parameters:
+'       Row - row number.
+'       Column - column name or index.
+'@Description Selects or clicks a table cell.
+'@Documentation Select or click the cell located in row <Row>, column <Column>, in the <Test object name> <Test object type>.
+Sub SelectCellForTable(obj, Row, Column)
+   On Error Resume Next
+   Dim ob, verticalSB, absNumOfRows, cols, numOfCols, bFound, theCell, str
+   Set ob = obj.object
+   bFound = False
+   theCell = Null
+   '1. find the cell
+   'simulate ensure absolute visible rows
+   Set verticalSB = ob.verticalscrollbar
+   absNumOfRows = verticalSB.maximum + verticalSB.pagesize
+   If Row > absNumOfRows Then
+           MsgBox "invalid row argument"
+           Exit Sub
+   End If
+   'check whether need to scroll up
+   If Row < verticalSB.position Then
+           verticalSB.position = Row - 1 'zero based
+   End If
+   'check whether need to scroll down
+   While Row > verticalSB.position + verticalSB.pagesize
+           verticalSB.position = verticalSB.position + verticalSB.pagesize
+        Wend
+        'simulate getCellComponentByLocation
+        'get the column and locate the required one
+        Set cols = ob.Columns
+        numOfCols = cols.Count
+        'the column could be given as an index
+        pos = InStr(1, Column, "#", 1)
+        If pos > 0 Then
+           colIndex = Right(Column, Len(Column) - 1)
+           If CInt(colIndex) < 0 Or CInt(colIndex) > numOfCols Then
+                   MsgBox "column index not valid: " & Column
+                   Exit Sub
+           End If
+           Set theCell = cols.elementat(colIndex - 1).elementat(Row - 1)
+        Else
+			For Each col In cols
+					If StrComp(Column, col.Title, 1) = 0 Then
+							'found the column
+							bFound = True
+							Set theCell = col.elementat(Row - 1)
+							Exit For
+					End If
+			Next
+		End If
+        If IsNull(theCell) Then
+                MsgBox "could not find the column"
+                Exit Sub
+        End If
+        'by this point we have the cell
+        
+    '2. check its type - button/normal
+        'msgbox "the cell type is : " & theCell.type
+        If theCell.Type = GuiButton Then
+                theCell.press
+                Else
+                theCell.SetFocus
+        End If
+   If Err.Number Then
+           MsgBox Err.Description
+   End If
+End Sub
+
+' Function SelectMenuForWindow
+' ----------------------------
+' Select a menu item from the menu bar.
+' Parameters:
+'       Path - path to the menu item, as it appears in the application.
+'@Description Selects a menu item from the menu bar.
+'@Documentation Select the <Path> menu item from the <Test object name> <Test object type>.
+Sub SelectMenuForWindow(obj, Path)
+   On Error Resume Next
+   'find the menus
+   Dim win, allchildren, menus, menubar, current, itemToSelect, bFound
+   itemToSelect = Null
+   menubar = Null
+   Set win = obj.object
+   Set allchildren = win.Children
+   'loop over the window's children and find the menu bar
+   For Each child In allchildren
+           If child.typeasnumber = 111 Then
+           Set menubar = child
+                   Exit For
+                End If
+        Next
+        'check whether the menu bar was found
+        If IsNull(menubar) Then
+                MsgBox "did not find the menu bar object"
+        Exit Sub
+        End If
+        'get the main items of the menu bar
+        Set menus = menubar.Children
+   'go through the path and look for the correct menu
+   While Path <> ""
+           bFound = False
+           current = ExtractFirst(Path)
+       'go through the menus and find the current item
+       For Each menu In menus
+           If StrComp(menu.Text, current, 1) = 0 Then
+                           'found the correct menu/item
+                           Set itemToSelect = menu      'hold to the last one we found
+               Set menus = menu.Children 'in order to go into the current menu
+                           bFound = True                        'indicate this iteration was successful
+                           Exit For
+                   End If
+           Next
+           'was the current item found?
+           If bFound = False Then
+                   MsgBox "failed to find " & current
+                   Exit Sub
+           End If
+   Wend
+   'was the menu found?
+   If Not IsNull(itemToSelect) Then
+       itemToSelect.Select
+           If Err.Number <> 0 Then
+                   MsgBox Err.Description
+           End If
+   End If
+End Sub
+
+' Function RightClickRowForGrid
+' -----------------------------
+' Click an item in a row's list of possible entries.
+' Parameters:
+'       Row - row number.
+'       Item - item name, as it appears in the application.
+'@Description Clicks an item in a row's list of possible entries.
+'@Documentation Click the <Item> item in row <Row>'s list of possible entries in the <Test object name> <Test object type>.
+Sub RightClickRowForGrid(obj, Row, Item)
+   On Error Resume Next
+   obj.SelectRow Row
+   obj.object.ContextMenu
+   obj.object.selectContextMenuItemByText Item
+   If Err.Number <> 0 Then
+           MsgBox Err.Description
+           Exit Sub
+   End If
+End Sub
+
+' Function RightClickCellForGrid
+' ------------------------------
+' Click an item in a cell's list of possible entries.
+' Parameters:
+'       Row - row number.
+'       Column - column name or index.
+'       Item - item name, as it appears in the menu.
+'@Description Clicks an item in a cell's list of possible entries.
+'@Documentation Click the <Item> item in the list of possible entries for the cell located in row <Row>, column <Column> in the <Test object name> <Test object type>.
+Sub RightClickCellForGrid(obj, Row, Column, Item)
+   On Error Resume Next
+   obj.SelectCell Row, Column
+   obj.object.ContextMenu
+   obj.object.selectContextMenuItemByText Item
+   If Err.Number <> 0 Then
+           MsgBox Err.Description
+           Exit Sub
+   End If
+End Sub
+
+' Function RightClickColumnForGrid
+' --------------------------------
+' Click an item in a column's list of possible entries.
+' Parameters:
+'       Column - column name or index.
+'       Item - item name, as it appears in the menu.
+'@Description Click an item in a column's list of possible entries.
+'@Documentation Click the <Item> item in the list of possible entries for the <Column> column in the  <Test object name> <Test object type>.
+Sub RightClickColumnForGrid(obj, Column, Item)
+   On Error Resume Next
+   obj.SelectColumn Column
+   obj.object.ContextMenu
+   obj.object.selectContextMenuItemByText Item
+   If Err.Number <> 0 Then
+           MsgBox Err.Description
+           Exit Sub
+   End If
+End Sub
+
+' Function OpenCellEntriesList
+' ----------------------------
+' Open the cell's list of possible entries.
+' Parameters:
+'       Row - row number.
+'       Column - column name or index.
+'@Description Opens the cell's list of possible entries.
+'@Documentation Open the list of possible entries for the cell located in row <Row>, column <Column> in the <Test object name> <Test object type>
+Sub OpenCellEntriesList(obj, Row, Column)
+   On Error Resume Next
+   obj.SelectCell Row, Column
+   obj.OpenPossibleEntries Row, Column
+   If Err.Number <> 0 Then
+           MsgBox Err.Description
+           Exit Sub
+   End If
+End Sub
+
+' Function SetCellDate
+' --------------------
+' Set a date value in a cell.
+' Parameters:
+'       Row - row number.
+'       Column - column name or index.
+'       Date - date (can be in format Today + <Relative>)
+'@Description Sets a date value in a cell.
+'@Documentation Set the date <Date> in the cell located in row <Row>, column <Column> in the <Test object name> <Test object type>.
+Sub SetCellDate(obj, Row, Column, Date)
+   On Error Resume Next
+   obj.SetCellData Row, Column, CreateDateForEdit(Date)
+   If Err.Number <> 0 Then
+           MsgBox Err.Description
+           Exit Sub
+   End If
+End Sub
+
+' Function FindRowByTextInCell
+' ----------------------------
+'Find the first row in the specified column that contains the specified text.
+'This method returns the row number that contains the specified text.
+'Parameters:
+'       Column - column name or index.
+'       Text - text for which to search.
+'       StartRow - row number from which to start searching.
+'@Description Finds the first row in the specified column that contains the specified text.
+'@Documentation Search the <Column> column in the <Test object name> <Test object type> from row <Row> to find the row that contains the text <Text>.
+Function FindRowByTextInCell(obj, Column, Text, StartRow)
+   FindRowByTextInCell = obj.FindRowByCellContent(Column, Text, StartRow)
+   If Err.Number <> 0 Then
+           MsgBox Err.Description
+   End If
+End Function
+
+' Function GetColumnsNum
+' ----------------------
+'Retrieve the number of columns.
+'This method returns the column count.
+'@Description Retrieves the number of columns.
+'@Documentation Retrieve the number of columns in the <Test object name> <Test object type>.
+Function GetColumnsNum(obj)
+   On Error Resume Next
+   GetColumnsNum = obj.ColumnCount
+   If Err.Number <> 0 Then
+           MsgBox Err.Description
+   End If
+End Function
+
+' Function GetRowsNum
+' -------------------
+'Retrieve the number of rows.
+'This method returns the row count.
+'@Description Retrieves the number of rows.
+'@Documentation Retrieve the number of rows in the <Test object name> <Test object type>.
+Function GetRowsNum(obj)
+   GetRowsNum = obj.RowCount
+   If Err.Number <> 0 Then
+           MsgBox Err.Description
+   End If
+End Function
+
+' Function PressEnter
+' -------------------
+'Press the Enter keyboard key.
+'@Description Presses the Enter keyboard key.
+'@Documentation Press the Enter keyboard key when the <Test object name> <Test object type> is in focus.
+Sub PressEnter(obj)
+   obj.PressEnter
+End Sub
+
+' Function SelectAll
+' ------------------
+' Select all columns of the table.
+'@Description Selects all columns in the table.
+'@Documentation Select all columns in the <Test object name> <Test object type>.
+Sub SelectAll(obj)
+   obj.SelectAllColumns
+End Sub
+
+' Function RightClickColumn
+' -------------------------
+'Click an item in the tree column context menu.
+'Parameters:
+'       Column - column name or index.
+'       Item - item name, as it appears in the application.
+'@Description Clicks an item in the tree column context menu.
+'@Documentation Click the <Item> item in the <Column> column's context menu in the <Test object name> <Test object type>.
+Sub RightClickColumn(obj, Column, Item)
+   On Error Resume Next
+   obj.OpenHeaderContextMenu Column
+   If Err.Number <> 0 Then
+           MsgBox Err.Description
+           Exit Sub
+   End If
+   ClickMenuItemByText obj, Item
+End Sub
+
+' Function RightClickTree
+' -----------------------
+' Click an item in the tree context menu.
+' Parameter:
+'       Item - menu item, as it appears in the application.
+'@Description Clicks an item in the tree context menu.
+'@Documentation Click the <Item> item in the <Test object name> <Test object type>'s context menu.
+Sub RightClickTree(obj, Item)
+   On Error Resume Next
+   obj.OpenContextMenu
+   If Err.Number <> 0 Then
+           MsgBox Err.Description
+           Exit Sub
+   End If
+   ClickMenuItemByText obj, Item
+End Sub
+
+' Function RightClickItem
+' -----------------------
+' Click an item in the tree item context menu.
+' Parameters:
+'       Node - path of the node in the tree.
+'       TreeItem - name of the tree item in the node.
+'       Item - menu item, as it appears in the application.
+'@Description Clicks an item in the tree item context menu.
+'@Documentation Click the <Item> item of the <TreeItem> tree item context menu in the <Node> node of the <Test object name> <Test object type>.
+Sub RightClickItem(obj, Node, TreeItem, Item)
+   On Error Resume Next
+   obj.OpenItemContextMenu Node, TreeItem
+   If Err.Number <> 0 Then
+           MsgBox Err.Description
+           Exit Sub
+   End If
+   ClickMenuItemByText obj, Item
+End Sub
+
+' Function RightClickNode
+' -----------------------
+' Click an item in the tree node context menu.
+' Parameters:
+'       Node - path of the node in the tree.
+'       Item - menu item, as it appears in the application.
+'@Description Clicks an item in the tree node context menu.
+'@Documentation Click the <Item> item of the <Node> node's context menu in the <Test object name> <Test object type>.
+Sub RightClickNode(obj, Node, Item)
+   On Error Resume Next
+   obj.OpenNodeContextMenu Node
+   If Err.Number <> 0 Then
+           MsgBox Err.Description
+           Exit Sub
+   End If
+   ClickMenuItemByText obj, Item
+End Sub
+
+' Function SelectForCombo
+' -----------------------
+' Select an item in a combo box. The item can be specified by name, SAP key, or index.
+' Parameter:
+'       Item - the name of the item (as it appears in the application),
+'         the internal SAP key of the item, or the index of the item.
+'@Description Selects an item from the list of options.
+'@Documentation Select the <Item> item from the <Test object name> <Test object type>.
+Sub SelectForCombo(obj, Item)
+   On Error Resume Next
+   obj.Select Item
+   If Err.Number <> 0 Then
+           obj.SelectKey Item
+   End If
+End Sub
+
+' Function SetProtected
+' ---------------------
+' Set the specified text in the specified unprotected section of the text area.
+' This method overrides the existing SAPGuiTextArea.SetUnprotectedTextPart method
+' (keeps the same functionality, but different name).
+' Parameters:
+'       Part - the index of the section in which the text should be entered.
+'       Text - the text to be entered.
+'@Description Specify text in the specified unprotected section of the text area.
+'@Documentation Enter the text "<Text>" in the unprotected area of <Test object name> <Test object type>.
+Sub SetProtected(obj, Part, Text)
+   obj.SetUnprotectedTextPart Part, Text
+End Sub
+
+' Function SelectForLabel
+' -----------------------
+' Select the label and place the cursor at the start of the label.
+'@Description Selects a label and places the cursor at the start of the label.
+'@Documentation Select the <Test object name> <Test object type>.
+Public Sub SelectForLabel(obj)
+   obj.SetFocus
+   obj.SetCaretPos 1
+End Sub
+
+' Function DoubleClickForLabel
+' ----------------------------
+' Double-click the label.
+'@Description Double-clicks the label.
+'@Documentation Double-click the <Test object name> <Test object type>.
+Sub DoubleClickForLabel(obj)
+   SelectForLabel (obj)
+   Dim winObj
+   Set parentObj = obj.object.Parent
+   ' loop over the parents and get the window object
+   While InStr(1, parentObj.id, "usr", 1) > 0
+           Dim aux
+           Set auxObj = parentObj.Parent
+           Set parentObj = auxObj
+   Wend
+   parentObj.SendVKey 0
+End Sub
+
+' Function ClickToolbarButton
+' ---------------------------
+'Click a toolbar button according to its tooltip.
+'The toolbar can be independent or residing within a grid.
+'Parameter:
+'       ButtonTooltip - text tooltip of the button.
+'@Description Clicks a button according to its tooltip.
+'@Documentation Click the button with the tooltip "<ButtonTooltip>" in the <Test object name> <Test object type>.
+Sub ClickToolbarButton(obj, ButtonTooltip)
+   'check whether this is an independent Ttoolbar or one located within a grid
+   If StrComp(obj.object.subType, "GridView", 1) = 0 Then
+           ClickGridToolbarButton obj, ButtonTooltip
+           Exit Sub
+   End If
+   If StrComp(obj.object.subType, "Toolbar", 1) = 0 Then
+           ClickIndependentToolbarButton obj, ButtonTooltip
+           Exit Sub
+   End If
+    If Err.Number <> 0 Then
+          MsgBox Err.Description
+    End If
+End Sub
+
+' Function SetDateRangeForCalendar
+' --------------------------------
+' Set a date range. For more information about the SAPGuiCalendar.SetDateRange method, refer to the 
+' SAP Windows section of the QuickTest Professional Object Model Reference. 
+' Parameters:
+'       StartDate - start of the date range.
+'       EndDate - end of the date range.
+'@Description Sets a date range. The start and end ranges can be relative to the current date.
+'@Documentation Set a date range from <StartDate> to <EndDate> into the <Test object name> <Test object type>.
+Sub SetDateRangeForCalendar(obj, StartDate, EndDate)
+   sd = CreateDate(StartDate)
+   ed = CreateDate(EndDate)
+   obj.SetDateRange sd, ed
+End Sub
+
+' Function GetText
+' ----------------
+' Get the Text run-time attribute.
+'@Description Get the Text run-time attribute.
+'@Documentation Get the Text run-time attribute of the <Test object name> <Test object type>.
+Function GetText(obj)
+        GetText = obj.GetROProperty("Text")
+End Function
+
+' Function SAPGuiCloseConnections
+' -------------------------------
+' Close all open SAP connections.
+'@Description Closes all open SAP connections.
+'@Documentation Close all open SAP connections.
+Public Sub SAPGuiCloseConnections()
+        SAPGuiUtil.CloseConnections
+End Sub
+
+' Function SAPGuiLaunchAndLogon
+' -----------------------------
+' Launch the SAP application and log in to the specified SAP Server using the specified client, user name, password
+' and language.
+' Parameters:
+'       Server - SAP server name.
+'       User - user name.
+'       Password - password.
+'		Client - client.
+'		Language - language.
+'@Description Launches the SAP application and logs in.
+'@Documentation Launch the SAP application and log in to the <Server> server as client <Client> and user <User> using the specified password and language <Language>.
+Public Sub SAPGuiLaunchAndLogon(Server, Client, User, Password, Language)
+        SAPGuiUtil.AutoLogon Server, Client, User, Password, Language
+End Sub
+
+' Function SetRelativeDate
+' ------------------------
+' Retrieve the current date and adds the specified number of days. Then enter
+' the new date in the edit object.
+' Parameter:
+'       PlusDays - number of days to add to today's date (can also be a negative number).
+'@Description Enters today's date plus the specified number of days into the edit box.
+'@Documentation Enter today's date plus <PlusDays> days in the <Test object name> <Test object type>.
+Sub SetRelativeDate(obj, PlusDays)
+        Dim MyDate, str
+        MyDate = Date + PlusDays
+        str = CStr(Day(MyDate)) + "." + CStr(Month(MyDate)) + "." + CStr(Year(MyDate))
+        obj.Set str
+End Sub
+
+' Function SetCurrentYear
+' -----------------------
+' Find the current year and enter it in the edit box.
+'@Description Finds the current year and enters it.
+'@Documentation Enter the current year in the <Test object name> <Test object type>.
+Sub SetCurrentYear(obj)
+        Dim MyDate, myYear
+        MyDate = Date
+        myYear = Year(MyDate)
+        obj.Set myYear
+End Sub
+
+' Function SetDateForCalendar
+' ---------------------------
+' Set a date in the calendar.
+' Parameter:
+'       Date - date, in string format.
+'@Description Sets a date in the calendar.
+'@Documentation Set the date <CalDate> in the <Test object name> <Test object type>.
+Public Sub SetDateForCalendar(ByRef obj, CalDate)
+        obj.SetDate CreateDate(CalDate)
+End Sub
+
+' Function StartTransaction
+' -------------------------
+' Start the SAP Gui for Windows session with a specified transaction code.
+' Parameter:
+'       TransactionCode - transaction code.
+'@Description Starts the SAP Gui for Windows session with a transaction code.
+'@Documentation Start the <Test object name> <Test object type> with the transaction code <TransactionCode>.
+Public Sub StartTransaction(ByRef SAPGuiSession, TransactionCode)
+        SAPGuiSession.object.StartTransaction TransactionCode
+End Sub
+
+' Function VerifySelected
+' -----------------------
+' Check whether the object's Selected property value matches the expected value.
+' Parameter:
+'       ExpectedValue - the expected property value.
+' Return value - true if the expected value matches the actual value.
+'@Description Checks the value of the Selected property.
+'@Documentation Check whether the Selected property value of the <Test object name> <Test object type> is <ExpectedValue>.
+Public Function VerifySelected(obj, ExpectedValue)
+        VerifySelected = VerifyProperty(obj, "selected", ExpectedValue)
+End Function
+
+' Function VerifyText
+' -------------------
+' Check whether the object's Text property value matches the expected value.
+' Parameter:
+'       ExpectedValue - the expected property value.
+' Return value - true if the actual value matches the expected value.
+'@Description Checks the value of the Text property.
+'@Documentation Check whether the Text property value of the <Test object name> <Test object type> is <ExpectedValue>.
+Public Function VerifyText(obj, ExpectedValue)
+        VerifyText = VerifyProperty(obj, "text", ExpectedValue)
+End Function
+
+' Function VerifyChecked
+' ----------------------
+' Check whether the object's Checked property value matches the expected value.
+' Parameter:
+'       ExpectedValue - the expected property value.
+' Return value - true if the actual value matches the expected value.
+'@Description Checks the value of the Checked property.
+'@Documentation Check whether the Checked property value of the <Test object name> <Test object type> is <ExpectedValue>.
+Public Function VerifyChecked(obj, ExpectedValue)
+        VerifyChecked = VerifyProperty(obj, "checked", ExpectedValue)
+End Function
+
+' Function VerifySelectedItem
+' ---------------------------
+' Check whether the object's SelectedItem property value matches the expected value.
+' Parameter:
+'       ExpectedValue - the expected property value.
+' Return value - true if the actual value matches the expected value.
+'@Description Checks the value of the SelectedItem property.
+'@Documentation Check whether the SelectedItem property value of the <Test object name> <Test object type> is <ExpectedValue>.
+Public Function VerifySelectedItem(obj, ExpectedValue)
+        VerifySelectedItem = VerifyProperty(obj, "selecteditem", ExpectedValue)
+End Function
+
+' Function VerifySelectedDate
+' ---------------------------
+' Check whether the object's SelectedDate property value matches the expected value.
+' Parameter:
+'       ExpectedValue - the expected property value.
+' Return value - true if the actual value matches the expected value.
+'@Description Checks the value of the SelectedDate property.
+'@Documentation Check whether the SelectedDate property value of the <Test object name> <Test object type> is <ExpectedValue>.
+Public Function VerifySelectedDate(obj, ExpectedValue)
+        VerifySelectedDate = VerifyProperty(obj, "selecteddate", ExpectedValue)
+End Function
+
+' Function GetSelectedItemProperty
+' --------------------------------
+' Retrieve the object's SelectedItem property value.
+' Return value - the value of the SelectedItem property.
+'@Description Retrieves the SelectedItem property value.
+'@Documentation Retrieve the value of the SelectedItem property for the <Test object name> <Test object type>.
+Public Function GetSelectedItemProperty(obj)
+        GetSelectedItemProperty = obj.GetROProperty("selecteditem")
+End Function
+
+' Function GetSelectedDateProperty
+' --------------------------------
+' Retrieve the object's SelectedDate property value.
+' Return value - the value of the SelectedDate property.
+'@Description Retrieves the SelectedDate property value.
+'@Documentation Retrieve the value of the SelectedDate property for the <Test object name> <Test object type>.
+Public Function GetSelectedDateProperty(obj)
+        GetSelectedDateProperty = obj.GetROProperty("selecteddate")
+End Function
+
+' Function PressKey
+' -----------------
+'Press the specified keyboard key.
+' Parameter:
+'       Key - the name of the keyboard key.
+'@Description Presses the specified keyboard key.
+'@Documentation Press <Key> on the keyboard.
+Public Sub PressKey(obj, Key)
+        If StrComp(Key, "enter", 1) = 0 Then
+                obj.SendKey 0
+        End If
+        If StrComp(Key, "f1", 1) = 0 Then
+                obj.SendKey f1
+        End If
+        If StrComp(Key, "f2", 1) = 0 Then
+                obj.SendKey f2
+        End If
+        If StrComp(Key, "f3", 1) = 0 Then
+                obj.SendKey f3
+        End If
+        If StrComp(Key, "f4", 1) = 0 Then
+                obj.SendKey f4
+        End If
+        If StrComp(Key, "f5", 1) = 0 Then
+                obj.SendKey f5
+        End If
+        If StrComp(Key, "f6", 1) = 0 Then
+                obj.SendKey f6
+        End If
+        If StrComp(Key, "f7", 1) = 0 Then
+                obj.SendKey f7
+        End If
+        If StrComp(Key, "f8", 1) = 0 Then
+                obj.SendKey f8
+        End If
+        If StrComp(Key, "f9", 1) = 0 Then
+                obj.SendKey f9
+        End If
+        If StrComp(Key, "f10", 1) = 0 Then
+                obj.SendKey f10
+        End If
+        If StrComp(Key, "f11", 1) = 0 Then
+                obj.SendKey f11
+        End If
+        If StrComp(Key, "esc", 1) = 0 Then
+                obj.SendKey esc
+        End If
+        If StrComp(Key, "SHIFT_F1", 1) = 0 Then
+                obj.SendKey SHIFT_F1
+        End If
+                If StrComp(Key, "SHIFT_F2", 1) = 0 Then
+                obj.SendKey SHIFT_F2
+        End If
+                If StrComp(Key, "SHIFT_F3", 1) = 0 Then
+                obj.SendKey SHIFT_F3
+        End If
+                If StrComp(Key, "SHIFT_F4", 1) = 0 Then
+                obj.SendKey SHIFT_F4
+        End If
+                If StrComp(Key, "SHIFT_F5", 1) = 0 Then
+                obj.SendKey SHIFT_F5
+        End If
+        If StrComp(Key, "SHIFT_F6", 1) = 0 Then
+                obj.SendKey SHIFT_F6
+        End If
+                If StrComp(Key, "SHIFT_F7", 1) = 0 Then
+                obj.SendKey SHIFT_F7
+        End If
+        If StrComp(Key, "SHIFT_F8", 1) = 0 Then
+                obj.SendKey SHIFT_F8
+        End If
+                If StrComp(Key, "SHIFT_F9", 1) = 0 Then
+                obj.SendKey SHIFT_F9
+        End If
+        If StrComp(Key, "SHIFT_F10", 1) = 0 Then
+                obj.SendKey SHIFT_F10
+        End If
+                If StrComp(Key, "SHIFT_F11", 1) = 0 Then
+                obj.SendKey SHIFT_F11
+        End If
+        If StrComp(Key, "SHIFT_F12", 1) = 0 Then
+                obj.SendKey SHIFT_F12
+        End If
+        If StrComp(Key, "CTRL_SHIFT_F1", 1) = 0 Then
+                obj.SendKey CTRL_SHIFT_F1
+        End If
+                If StrComp(Key, "CTRL_SHIFT_F2", 1) = 0 Then
+                obj.SendKey CTRL_SHIFT_F2
+        End If
+                If StrComp(Key, "CTRL_SHIFT_F3", 1) = 0 Then
+                obj.SendKey CTRL_SHIFT_F3
+        End If
+                If StrComp(Key, "CTRL_SHIFT_F4", 1) = 0 Then
+                obj.SendKey CTRL_SHIFT_F4
+        End If
+                If StrComp(Key, "CTRL_SHIFT_F5", 1) = 0 Then
+                obj.SendKey CTRL_SHIFT_F5
+        End If
+        If StrComp(Key, "CTRL_SHIFT_F6", 1) = 0 Then
+                obj.SendKey CTRL_SHIFT_F6
+        End If
+                If StrComp(Key, "CTRL_SHIFT_F7", 1) = 0 Then
+                obj.SendKey CTRL_SHIFT_F7
+        End If
+        If StrComp(Key, "CTRL_SHIFT_F8", 1) = 0 Then
+                obj.SendKey CTRL_SHIFT_F8
+        End If
+                If StrComp(Key, "CTRL_SHIFT_F9", 1) = 0 Then
+                obj.SendKey CTRL_SHIFT_F9
+        End If
+        If StrComp(Key, "CTRL_SHIFT_F10", 1) = 0 Then
+                obj.SendKey CTRL_SHIFT_F10
+        End If
+                If StrComp(Key, "CTRL_SHIFT_F11", 1) = 0 Then
+                obj.SendKey CTRL_SHIFT_F11
+        End If
+        If StrComp(Key, "CTRL_SHIFT_F12", 1) = 0 Then
+                obj.SendKey CTRL_SHIFT_F12
+        End If
+        If StrComp(Key, "CTRL_F", 1) = 0 Then
+                obj.SendKey CTRL_F
+        End If
+                If StrComp(Key, "CTRL_G", 1) = 0 Then
+                obj.SendKey CTRL_G
+        End If
+                If StrComp(Key, "CTRL_P", 1) = 0 Then
+                obj.SendKey CTRL_P
+        End If
+                If StrComp(Key, "CTRL_PAGEUP", 1) = 0 Then
+                obj.SendKey CTRL_PAGEUP
+        End If
+                If StrComp(Key, "CTRL_PAGEDOWN", 1) = 0 Then
+                obj.SendKey CTRL_PAGEDOWN
+        End If
+                If StrComp(Key, "PAGEUP", 1) = 0 Then
+                obj.SendKey PAGEUP
+        End If
+                If StrComp(Key, "PAGEDOWN", 1) = 0 Then
+                obj.SendKey PAGEDOWN
+        End If
+End Sub
+
+' Function FillRecordByRow
+' ------------------------
+'This method receives a row number and a list of values and sets the values in the given row, starting
+'from the first column (#1). 
+' Parameter:
+'       Row - the number of the row in which to enter the record values.
+'       RecordValues - the values to be set in the record in the specified row. Record argument values 
+'                      are separated by a semicolon (;). For example, value1;value2;value3.
+'@Description Enters values in the table for the specified row.
+'@Documentation Enter the specified values in row <Row> of the <Test object name> <Test object type>.
+Public Sub FillRecordByRow (Obj, Row, RecordValues)
+   Dim valArr, rowNum
+   ColumnNum = 1
+   valArr = Split(RecordValues, ";")
+   For each val in valArr
+	   If val <> "" Then
+		   Obj.SetCellData Row, "#" & ColumnNum, val
+	   End If
+	   ColumnNum = ColumnNum + 1
+   Next
+End Sub
+
+' Function FillRecordByColumnName
+' -------------------------------
+'This method receives a row number and pairs of column name and value. It sets each value in its
+'corresponding column, in the specified row.
+' Parameter:
+'       Row - the number of the row in which to enter the record values.
+'       RecordValues - the values to be set in the record in the specified row. Record argument values are 
+'                      separated by a semicolon (;), and both halves of the pair are separated by a colon (:). 
+'                      For example, column1:value1;column2:value2;column3:value3.
+'@Description Enters values in the table for specified columns, according to row.
+'@Documentation Enter the specified values in row <Row> of the <Test object name> <Test object type>.
+Public Sub FillRecordByColumnName (Obj, Row, RecordValues)
+   Dim colArr, valArr
+   colArr = Split(RecordValues, ";")
+   For each val in colArr
+	  valArr = Split(val, ":")
+	  Obj.SetCellData Row, valArr(0), valArr(1)
+   Next
+End Sub
+
+' *********************************************************************
+' ***                           Utility Functions
+' *********************************************************************
+'
+' Click a toolbar menu item, when the toolbar resides in a grid.
+' The path includes the item, as it appears in the application.
+Private Function SelectGridToolbarMenuItem(obj, Path)
+  bFound = False
+   Dim ob
+   Set ob = obj.object
+   'get the button from the path
+   button = ExtractFirst(Path)
+   'go through the button tooltips and find the one we need
+   numOfButtons = ob.toolbarButtonCount
+   For i = 0 To numOfButtons
+           If StrComp(ob.getToolbarButtonTooltip(i), button, 1) = 0 Then
+                   'found the button. Get the id and click the context menu
+                   id = ob.getToolbarButtonId(i)
+                   ob.pressToolbarContextButton (id)
+                   bFound = True
+                   Exit For
+           End If
+   Next
+   If bFound = True Then
+            'the shell object (grid in this case), requires that the items in the path are separated using '|'
+                ob.selectContextMenuItemByText Replace(Path, ";", "|")
+   End If
+End Function
+
+'Click a toolbar menu item, when the toolbar is independent.
+' The path includes the item, as it appears in the application.
+Private Function SelectIndependentToolbarMenuItem(obj, Path)
+   bFound = False
+   Dim ob
+   Set ob = obj.object
+   'get the button from the path
+   button = ExtractFirst(Path)
+   'go through the button tooltips and find the one we need
+   numOfButtons = ob.buttonCount
+   For i = 0 To numOfButtons
+           If StrComp(ob.getButtonTooltip(i), button, 1) = 0 Then
+                   'found the button. Click the context menu
+           id = obj.object.getButtonId(i)
+           obj.object.pressContextButton id
+                   bFound = True
+                   Exit For
+           End If
+   Next
+   If bFound = True Then
+       'press the required item. Note that the order of replacement is important
+                obj.object.SelectMenuItemByText Replace(Replace(Path, "/", "//"), ";", "/")
+        Else
+                'did not find the button
+                MsgBox "could not find the button: " & button
+   End If
+   If Err.Number <> 0 Then
+           MsgBox Err.Description
+   End If
+End Function
+
+'Click a toolbar button according to the button's tooltip. This function is
+'for an independent toolbar. It receives the tooltip of the button.
+Private Function ClickIndependentToolbarButton(obj, ButtonTooltip)
+   'use the tooltip to get the button
+   Dim ob, buttons, button, buttonCount, i
+   Set ob = obj.object
+   buttonCount = ob.buttonCount
+   For i = 0 To buttonCount
+           If StrComp(ButtonTooltip, ob.getButtonTooltip(i), 1) = 0 Then
+                   ob.pressButton (ob.getButtonId(i))
+                   Exit Function
+           End If
+   Next
+End Function
+
+'Click a toolbar button according to the button's tooltip. This function is
+'for a toolbar that resides in a grid. It receives the tooltip of the button.
+Private Function ClickGridToolbarButton(obj, ButtonTooltip)
+        'get the number of toolbar buttons
+        numOfButtons = obj.object.toolbarButtonCount
+        'go through the buttons and find the one with the same tooltip
+        For i = 0 To numOfButtons
+                curToolTip = obj.object.getToolbarButtonTooltip(i)
+                If StrComp(curToolTip, ButtonTooltip, 1) = 0 Then
+                        'found the button. Get its id and click it
+                        id = obj.object.getToolbarButtonId(i)
+                        obj.object.pressToolbarButton id
+                        Exit Function
+                End If
+        Next
+End Function
+
+' Given the node key and the name of the item, this method returns the
+' key of the item.
+Private Function GetTreeItemKey(ob, Nodekey, Item)
+On Error Resume Next
+        Dim itemcol, colnames
+        'check whether the item is an index
+        itemindex = 0
+        If InStr(1, Item, "#", 1) > 0 Then
+                itemindex = CInt(Right(Item, Len(Item) - 1))
+                If itemindex < 1 Then
+                        MsgBox "item index not valid: " & itemindex
+                        Exit Function
+                End If
+        End If
+        treetype = ob.getTreeType
+        If treetype = 1 Then    'list tree
+                itemcount = ob.GetListTreeNodeItemCount(Nodekey)
+                If itemindex > 0 Then
+                        If itemindex > itemcount Then
+                MsgBox "item index not valid: " & itemindex
+                                Exit Function
+                        End If
+                        GetTreeItemKey = itemindex
+                        Exit Function
+                End If
+                'not an index
+                For i = 1 To itemcount
+                        If StrComp(Item, ob.getItemText(Nodekey, i), 1) = 0 Then
+                                'found the item
+                                GetTreeItemKey = i
+                                Exit Function
+                        End If
+                Next
+        End If
+        If treetype = 2 Then ' column tree
+                Set colnames = ob.GetColumnNames
+                If itemindex > 0 Then
+                        If itemindex > colnames.Count Then
+                                MsgBox "item index not valid: " & itemindex
+                                GetTreeItemKey = Null
+                                Exit Function
+                        End If
+                        GetTreeItemKey = colnames.elementat(itemindex - 1) 'reduce one since user works one-based
+                        Exit Function
+                End If
+                ' not an index
+                For i = 0 To colnames.Count
+            If StrComp(Item, ob.getItemText(Nodekey, colnames.elementat(i)), 1) = 0 Then
+                                'found the item
+                                GetTreeItemKey = colnames.elementat(i)
+                                Exit Function
+                        End If
+                Next
+        End If
+        ' indicate we did not find the item
+        GetTreeItemKey = -1
+End Function
+
+'This method receives a string BYREF.
+'It returns the first element in the string and removes it from the given string.
+Private Function ExtractFirst(ByRef str)
+    pos = InStr(1, str, ";", 1)
+        If pos > 0 Then
+                Dim substr
+                substr = Left(str, pos - 1)
+                str = Right(str, Len(str) - pos)
+                ExtractFirst = substr
+                Exit Function
+        End If
+        'in case there is only one element
+        ExtractFirst = str
+        str = ""
+End Function
+
+' For a tree test object. Receive the object after the required context menu was opened
+' and find the item within the menu. This function receives the TEXT of the
+' item and not its ID.
+Private Function ClickMenuItemByText(obj, Item)
+   On Error Resume Next
+   Dim menu
+   Set menu = obj.object.CurrentContextMenu
+   If Err.Number <> 0 Then
+           MsgBox Err.Description
+           Exit Function
+   End If
+   For Each child In menu.Children
+           If child.Text = Item Then
+                   obj.object.SelectContextMenuItem child.Name
+                   If Err.Number <> 0 Then
+                           MsgBox Err.Description
+                   End If
+                   Exit Function
+           End If
+   Next
+End Function
+
+'The format for edit fields that receive dates is dd.mm.yyyy. Since the
+'system Function "Date" is used, which returns the date using '/', it needs to be
+'converted to the format the edit field requires.
+Private Function TurnToQTPeditForm(TheDate)
+   theday = Day(TheDate)
+   TheMonth = Month(TheDate)
+   theyear = Year(TheDate)
+   TurnToQTPeditForm = theday & "." & TheMonth & "." & theyear
+End Function
+
+'Retrieve the current date from the system.
+Private Function GetCurrentDate()
+   GetCurrentDate = FormatDateTime(Date, 2)
+End Function
+
+'Convert the month from a number to a string.
+Private Function TurnIntToStr(TheMonth)
+   If themonth=1 Then turninttostr="jan" End If
+   If themonth=2 Then turninttostr="feb" End If
+   If themonth=3 Then turninttostr="mar" End If
+   If themonth=4 Then turninttostr="apr" End If
+   If themonth=5 Then turninttostr="may" End If
+   If themonth=6 Then turninttostr="jun" End If
+   If themonth=7 Then turninttostr="jul" End If
+   If themonth=8 Then turninttostr="aug" End If
+   If themonth=9 Then turninttostr="sep" End If
+   If themonth=10 Then turninttostr="oct" End If
+   If themonth=11 Then turninttostr="nov" End If
+   If themonth=12 Then turninttostr="dec" End If
+End Function
+
+'This method is used by the calendar test object library functions. It converts the month from a number
+' to a string in dates.
+Private Function TurnToQTPform(TheDate)
+   theday = Day(TheDate)
+   TheMonth = TurnIntToStr(Month(TheDate))
+   theyear = Year(TheDate)
+   TurnToQTPform = theday & "/" & TheMonth & "/" & theyear
+End Function
+
+'Change the format of dates such as dd.mm.yy to dd/mm/yy
+Private Function TurnDotsToSlashes(Date)
+   pos1 = InStr(1, Date, ".", 1)
+   pos2 = InStr(pos1 + 1, Date, ".", 1)
+   If pos1 > 0 And pos2 > 0 Then
+          str = Left(Date, pos1 - 1) & "/" & Mid(Date, pos1 + 1, pos2 - pos1 - 1) & "/" & Right(Date, Len(Date) - pos2)
+          TurnDotsToSlashes = str
+          Exit Function
+   End If
+   TurnDotsToSlashes = Date
+End Function
+
+'Change the format of dates such as dd/mm/yy to dd.mm.yy.
+Private Function TurnSlashesToDots(Date)
+   pos1 = InStr(1, Date, "/", 1)
+   pos2 = InStr(pos1 + 1, Date, "/", 1)
+   If pos1 > 0 And pos2 > 0 Then
+          str = Left(Date, pos1 - 1) & "." & Mid(Date, pos1 + 1, pos2 - pos1 - 1) & "." & Right(Date, Len(Date) - pos2)
+          TurnSlashesToDots = str
+          Exit Function
+   End If
+   TurnSlashesToDots = Date
+End Function
+
+'This method is used by the edit test object library functions. It is used to extract the required
+'date from the given argument.
+Private Function CreateDateForEdit(MyDate)
+   'current
+   If StrComp(MyDate, "today") = 0 Then
+           d = TurnToQTPeditForm(FormatDateTime(Date, 2))
+           CreateDateForEdit = d
+           Exit Function
+   End If
+   'check relative
+   pos = InStr(1, MyDate, "today", 1)
+   If pos > 0 Then
+           'find the '+'
+           mylen = Len(MyDate)
+           retstr = Right(MyDate, mylen - 5)    'the '+' and the added number
+       pos = InStr(1, retstr, "+", 1)
+       If pos > 0 Then
+                   mylen = Len(retstr)
+                   retstr = Right(retstr, mylen - pos)  'only the added number
+           d = Date + retstr
+           CreateDateForEdit = TurnToQTPeditForm(FormatDateTime(d, 2))
+                   Exit Function
+       End If
+   End If
+   'hard date
+   CreateDateForEdit = TurnSlashesToDots(MyDate)
+End Function
+
+'This method is used by the calendar test object library functions. It is used to extract the required
+'date from the specified argument. Check the calendar methods for more information.
+Private Function CreateDate(MyDate)
+   'current
+   If StrComp(MyDate, "today") = 0 Then
+           d = TurnToQTPform(FormatDateTime(Date, 2))
+           CreateDate = d
+           Exit Function
+   End If
+   'check relative
+   pos = InStr(1, MyDate, "today", 1)
+   If pos > 0 Then
+           'find the '+'
+           mylen = Len(MyDate)
+           retstr = Right(MyDate, mylen - 5)    'the '+' and the added number
+       pos = InStr(1, retstr, "+", 1)
+           If pos > 0 Then
+                   mylen = Len(retstr)
+                   retstr = Right(retstr, mylen - pos)  'only the added number
+                   d = Date + retstr
+           CreateDate = TurnToQTPform(FormatDateTime(d, 2))
+                   Exit Function
+       End If
+   End If
+   'hard date
+   CreateDate = TurnToQTPform(FormatDateTime(TurnDotsToSlashes(MyDate), 2))
+End Function
+
+' *********************************************************************
+' ***                   Register Common Functions
+' *********************************************************************
+'                                               Function VerifyProperty
+'                                               ------------------------
+RegisterUserFunc "SAPGuiButton", "VerifyProperty", "VerifyProperty"
+RegisterUserFunc "SAPGuiAPOGrid", "VerifyProperty", "VerifyProperty"
+RegisterUserFunc "SAPGuiTable", "VerifyProperty", "VerifyProperty"
+RegisterUserFunc "SAPGuiGrid", "VerifyProperty", "VerifyProperty"
+RegisterUserFunc "SAPGuiCheckBox", "VerifyProperty", "VerifyProperty"
+RegisterUserFunc "SAPGuiMenubar", "VerifyProperty", "VerifyProperty"
+RegisterUserFunc "SAPGuiTextArea", "VerifyProperty", "VerifyProperty"
+RegisterUserFunc "SAPGuiEdit", "VerifyProperty", "VerifyProperty"
+RegisterUserFunc "SAPGuiOKCode", "VerifyProperty", "VerifyProperty"
+RegisterUserFunc "SAPGuiRadioButton", "VerifyProperty", "VerifyProperty"
+RegisterUserFunc "SAPGuiTree", "VerifyProperty", "VerifyProperty"
+RegisterUserFunc "SAPGuiComboBox", "VerifyProperty", "VerifyProperty"
+RegisterUserFunc "SAPGuiTabStrip", "VerifyProperty", "VerifyProperty"
+RegisterUserFunc "SAPGuiStatusBar", "VerifyProperty", "VerifyProperty"
+RegisterUserFunc "SAPGuiCalendar", "VerifyProperty", "VerifyProperty"
+RegisterUserFunc "SAPGuiWindow", "VerifyProperty", "VerifyProperty"
+RegisterUserFunc "SAPGuiToolbar", "VerifyProperty", "VerifyProperty"
+RegisterUserFunc "SAPGuiSession", "VerifyProperty", "VerifyProperty"
+RegisterUserFunc "SAPGuiLabel", "VerifyProperty", "VerifyProperty"
+RegisterUserFunc "SAPGuiElement", "VerifyProperty", "VerifyProperty"
+RegisterUserFunc "SAPButton", "VerifyProperty", "VerifyProperty"
+RegisterUserFunc "SAPTable", "VerifyProperty", "VerifyProperty"
+RegisterUserFunc "SAPCheckBox", "VerifyProperty", "VerifyProperty"
+RegisterUserFunc "SAPDropDownMenu", "VerifyProperty", "VerifyProperty"
+RegisterUserFunc "SAPMenu", "VerifyProperty", "VerifyProperty"
+RegisterUserFunc "SAPEdit", "VerifyProperty", "VerifyProperty"
+RegisterUserFunc "SAPOKCode", "VerifyProperty", "VerifyProperty"
+RegisterUserFunc "SAPRadioGroup", "VerifyProperty", "VerifyProperty"
+RegisterUserFunc "SAPNavigationBar", "VerifyProperty", "VerifyProperty"
+RegisterUserFunc "SAPTreeView", "VerifyProperty", "VerifyProperty"
+RegisterUserFunc "SAPList", "VerifyProperty", "VerifyProperty"
+RegisterUserFunc "SAPTabStrip", "VerifyProperty", "VerifyProperty"
+RegisterUserFunc "SAPStatusBar", "VerifyProperty", "VerifyProperty"
+RegisterUserFunc "SAPFrame", "VerifyProperty", "VerifyProperty"
+RegisterUserFunc "SAPPortal", "VerifyProperty", "VerifyProperty"
+RegisterUserFunc "SAPiView", "VerifyProperty", "VerifyProperty"
+
+'                                       Function OutputProperty
+'                                       -----------------------
+RegisterUserFunc "SAPGuiButton", "OutputProperty", "OutputProperty"
+RegisterUserFunc "SAPGuiAPOGrid", "OutputProperty", "OutputProperty"
+RegisterUserFunc "SAPGuiTable", "OutputProperty", "OutputProperty"
+RegisterUserFunc "SAPGuiGrid", "OutputProperty", "OutputProperty"
+RegisterUserFunc "SAPGuiCheckBox", "OutputProperty", "OutputProperty"
+RegisterUserFunc "SAPGuiMenubar", "OutputProperty", "OutputProperty"
+RegisterUserFunc "SAPGuiTextArea", "OutputProperty", "OutputProperty"
+RegisterUserFunc "SAPGuiEdit", "OutputProperty", "OutputProperty"
+RegisterUserFunc "SAPGuiOKCode", "OutputProperty", "OutputProperty"
+RegisterUserFunc "SAPGuiRadioButton", "OutputProperty", "OutputProperty"
+RegisterUserFunc "SAPGuiTree", "OutputProperty", "OutputProperty"
+RegisterUserFunc "SAPGuiComboBox", "OutputProperty", "OutputProperty"
+RegisterUserFunc "SAPGuiTabStrip", "OutputProperty", "OutputProperty"
+RegisterUserFunc "SAPGuiStatusBar", "OutputProperty", "OutputProperty"
+RegisterUserFunc "SAPGuiCalendar", "OutputProperty", "OutputProperty"
+RegisterUserFunc "SAPGuiWindow", "OutputProperty", "OutputProperty"
+RegisterUserFunc "SAPGuiToolbar", "OutputProperty", "OutputProperty"
+RegisterUserFunc "SAPGuiSession", "OutputProperty", "OutputProperty"
+RegisterUserFunc "SAPGuiLabel", "OutputProperty", "OutputProperty"
+RegisterUserFunc "SAPGuiElement", "OutputProperty", "OutputProperty"
+RegisterUserFunc "SAPButton", "OutputProperty", "OutputProperty"
+RegisterUserFunc "SAPTable", "OutputProperty", "OutputProperty"
+RegisterUserFunc "SAPCheckBox", "OutputProperty", "OutputProperty"
+RegisterUserFunc "SAPDropDownMenu", "OutputProperty", "OutputProperty"
+RegisterUserFunc "SAPMenu", "OutputProperty", "OutputProperty"
+RegisterUserFunc "SAPEdit", "OutputProperty", "OutputProperty"
+RegisterUserFunc "SAPOKCode", "OutputProperty", "OutputProperty"
+RegisterUserFunc "SAPRadioGroup", "OutputProperty", "OutputProperty"
+RegisterUserFunc "SAPNavigationBar", "OutputProperty", "OutputProperty"
+RegisterUserFunc "SAPTreeView", "OutputProperty", "OutputProperty"
+RegisterUserFunc "SAPList", "OutputProperty", "OutputProperty"
+RegisterUserFunc "SAPTabStrip", "OutputProperty", "OutputProperty"
+RegisterUserFunc "SAPStatusBar", "OutputProperty", "OutputProperty"
+RegisterUserFunc "SAPFrame", "OutputProperty", "OutputProperty"
+RegisterUserFunc "SAPPortal", "OutputProperty", "OutputProperty"
+RegisterUserFunc "SAPiView", "OutputProperty", "OutputProperty"
+
+'                                       Function VerifyValue
+'                                       --------------------
+RegisterUserFunc "SAPGuiCheckBox", "VerifyValue", "VerifySelected"
+RegisterUserFunc "SAPGuiTextArea", "VerifyValue", "VerifyText"
+RegisterUserFunc "SAPGuiEdit", "VerifyValue", "VerifyValue"
+RegisterUserFunc "SAPGuiOKCode", "VerifyValue", "VerifyValue"
+RegisterUserFunc "SAPGuiRadioButton", "VerifyValue", "VerifySelected"
+RegisterUserFunc "SAPGuiComboBox", "VerifyValue", "VerifyText"
+RegisterUserFunc "SAPGuiTabStrip", "VerifyValue", "VerifySelectedItem"
+RegisterUserFunc "SAPGuiCalendar", "VerifyValue", "VerifySelectedDate"
+RegisterUserFunc "SAPGuiLabel", "VerifyValue", "VerifyText"
+RegisterUserFunc "SAPCheckBox", "VerifyValue", "VerifyChecked"
+RegisterUserFunc "SAPEdit", "VerifyValue", "VerifyValue"
+RegisterUserFunc "SAPOKCode", "VerifyValue", "VerifyValue"
+RegisterUserFunc "SAPRadioGroup", "VerifyValue", "VerifyValue"
+RegisterUserFunc "SAPList", "VerifyValue", "VerifyValue"
+
+'                                       Function GetValue
+'                                       -----------------
+RegisterUserFunc "SAPGuiCheckBox", "GetValue", "GetSelectedProperty"
+RegisterUserFunc "SAPGuiTextArea", "GetValue", "GetTextProperty"
+RegisterUserFunc "SAPGuiEdit", "GetValue", "GetValueProperty"
+RegisterUserFunc "SAPGuiOKCode", "GetValue", "GetValueProperty"
+RegisterUserFunc "SAPGuiRadioButton", "GetValue", "GetSelectedProperty"
+RegisterUserFunc "SAPGuiComboBox", "GetValue", "GetTextProperty"
+RegisterUserFunc "SAPGuiTabStrip", "GetValue", "GetSelectedItemProperty"
+RegisterUserFunc "SAPGuiCalendar", "GetValue", "GetSelectedDateProperty"
+RegisterUserFunc "SAPGuiLabel", "GetValue", "GetTextProperty"
+RegisterUserFunc "SAPCheckBox", "GetValue", "GetCheckedProperty"
+RegisterUserFunc "SAPEdit", "GetValue", "GetValueProperty"
+RegisterUserFunc "SAPOKCode", "GetValue", "GetValueProperty"
+RegisterUserFunc "SAPRadioGroup", "GetValue", "GetValueProperty"
+RegisterUserFunc "SAPList", "GetValue", "GetValueProperty"
+
+'                                       Function VerifyEnable
+'                                       ---------------------
+RegisterUserFunc "SAPGuiButton", "VerifyEnable", "VerifyEnabled"
+RegisterUserFunc "SAPGuiAPOGrid", "VerifyEnable", "VerifyEnabled"
+RegisterUserFunc "SAPGuiTable", "VerifyEnable", "VerifyEnabled"
+RegisterUserFunc "SAPGuiGrid", "VerifyEnable", "VerifyEnabled"
+RegisterUserFunc "SAPGuiCheckBox", "VerifyEnable", "VerifyEnabled"
+RegisterUserFunc "SAPGuiMenubar", "VerifyEnable", "VerifyEnabled"
+RegisterUserFunc "SAPGuiTextArea", "VerifyEnable", "VerifyEnabled"
+RegisterUserFunc "SAPGuiEdit", "VerifyEnable", "VerifyEnabled"
+RegisterUserFunc "SAPGuiOKCode", "VerifyEnable", "VerifyEnabled"
+RegisterUserFunc "SAPGuiRadioButton", "VerifyEnable", "VerifyEnabled"
+RegisterUserFunc "SAPGuiTree", "VerifyEnable", "VerifyEnabled"
+RegisterUserFunc "SAPGuiComboBox", "VerifyEnable", "VerifyEnabled"
+RegisterUserFunc "SAPGuiTabStrip", "VerifyEnable", "VerifyEnabled"
+RegisterUserFunc "SAPGuiStatusBar", "VerifyEnable", "VerifyEnabled"
+RegisterUserFunc "SAPGuiCalendar", "VerifyEnable", "VerifyEnabled"
+RegisterUserFunc "SAPGuiWindow", "VerifyEnable", "VerifyEnabled"
+RegisterUserFunc "SAPGuiToolbar", "VerifyEnable", "VerifyEnabled"
+RegisterUserFunc "SAPGuiSession", "VerifyEnable", "VerifyEnabled"
+RegisterUserFunc "SAPGuiLabel", "VerifyEnable", "VerifyEnabled"
+RegisterUserFunc "SAPGuiElement", "VerifyEnable", "VerifyEnabled"
+RegisterUserFunc "SAPButton", "VerifyEnable", "VerifyEnable"
+RegisterUserFunc "SAPTable", "VerifyEnable", "VerifyEnable"
+RegisterUserFunc "SAPCheckBox", "VerifyEnable", "VerifyEnable"
+RegisterUserFunc "SAPDropDownMenu", "VerifyEnable", "VerifyEnable"
+RegisterUserFunc "SAPMenu", "VerifyEnable", "VerifyEnable"
+RegisterUserFunc "SAPEdit", "VerifyEnable", "VerifyEnable"
+RegisterUserFunc "SAPOKCode", "VerifyEnable", "VerifyEnable"
+RegisterUserFunc "SAPRadioGroup", "VerifyEnable", "VerifyEnable"
+RegisterUserFunc "SAPNavigationBar", "VerifyEnable", "VerifyEnable"
+RegisterUserFunc "SAPTreeView", "VerifyEnable", "VerifyEnable"
+RegisterUserFunc "SAPList", "VerifyEnable", "VerifyEnable"
+RegisterUserFunc "SAPTabStrip", "VerifyEnable", "VerifyEnable"
+RegisterUserFunc "SAPStatusBar", "VerifyEnable", "VerifyEnable"
+RegisterUserFunc "SAPFrame", "VerifyEnable", "VerifyEnable"
+RegisterUserFunc "SAPPortal", "VerifyEnable", "VerifyEnable"
+RegisterUserFunc "SAPiView", "VerifyEnable", "VerifyEnable"
+
+'                                       Function Sync
+'                                       -------------
+RegisterUserFunc "SAPFrame", "Sync", "Sync", True
+RegisterUserFunc "SAPiView", "Sync", "Sync", True
+
+'                                       Function StartTransaction
+'                                       -------------------------
+RegisterUserFunc "SAPGuiSession", "StartTransaction", "StartTransaction"
+
+'                                       Function SetRelativeDate
+'                                       ------------------------
+RegisterUserFunc "SAPGuiEdit", "SetRelativeDate", "SetRelativeDate"
+
+'                                       Function SetCurrentYear
+'                                       -----------------------
+RegisterUserFunc "SAPGuiEdit", "SetCurrentYear", "SetCurrentYear"
+
+'                                       Function PressKey
+'                                       -----------------
+RegisterUserFunc "SAPGuiWindow", "PressKey", "PressKey"
+
+'                                       Function SetDateForCalendar
+'                                       ---------------------------
+RegisterUserFunc "SAPGuiCalendar", "SetDate", "SetDateForCalendar"
+
+'                                       Function SetDateRangeForCalendar
+'                                       --------------------------------
+RegisterUserFunc "SAPGuiCalendar", "SetDateRange", "SetDateRangeForCalendar"
+
+'                                       Function ClickToolbarButton
+'                                       ---------------------------
+RegisterUserFunc "SAPGuiToolbar", "Click", "ClickToolbarButton", true
+
+'                                       Function DoubleClickForLabel
+'                                       ----------------------------
+RegisterUserFunc "SAPGuiLabel", "Activate", "DoubleClickForLabel"
+
+'                                       Function SelectForLabel
+'                                       -----------------------
+RegisterUserFunc "SAPGuiLabel", "Select", "SelectForLabel", True
+
+'                                       Function SetProtected
+'                                       ---------------------
+RegisterUserFunc "SAPGuiTextArea", "SetProtected", "SetProtected"
+
+'                                       Function SelectForCombo
+'                                       -----------------------
+RegisterUserFunc "SAPGuiComboBox", "Select", "SelectForCombo"
+
+'                                       Function RightClickItem
+'                                       -----------------------
+RegisterUserFunc "SAPGuiTree", "RightClickItem", "RightClickItem"
+
+'                                       Function RightClickNode
+'                                       -----------------------
+RegisterUserFunc "SAPGuiTree", "RightClickNode", "RightClickNode"
+
+'                                       Function RightClickTree
+'                                       -----------------------
+RegisterUserFunc "SAPGuiTree", "RightClickTree", "RightClickTree"
+
+'                                       Function RightClickColumn
+'                                       -------------------------
+RegisterUserFunc "SAPGuiTree", "RightClickColumn", "RightClickColumn"
+
+'                                       Function SelectAll
+'                                       ------------------
+RegisterUserFunc "SAPGuiTable", "SelectAll", "SelectAll"
+
+'                                       Function PressEnter
+'                                       -------------------
+RegisterUserFunc "SAPGuiTable", "PressEnter", "PressEnter"
+
+'                                       Function GetRowsNum
+'                                       -------------------
+RegisterUserFunc "SAPGuiTable", "GetRowsNum", "GetRowsNum"
+RegisterUserFunc "SAPGuiGrid", "GetRowsNum", "GetRowsNum"
+
+'                                       Function GetColumnsNum
+'                                       ----------------------
+RegisterUserFunc "SAPGuiTable", "GetColumnsNum", "GetColumnsNum"
+RegisterUserFunc "SAPGuiGrid", "GetColumnsNum", "GetColumnsNum"
+
+'                                       Function SetCellDate
+'                                       --------------------
+RegisterUserFunc "SAPGuiTable", "SetCellDate", "SetCellDate"
+RegisterUserFunc "SAPGuiGrid", "SetCellDate", "SetCellDate"
+
+'                                       Function OpenCellEntriesList
+'                                       ----------------------------
+RegisterUserFunc "SAPGuiGrid", "OpenCellEntriesList", "OpenCellEntriesList"
+RegisterUserFunc "SAPGuiTable", "OpenCellEntriesList", "OpenCellEntriesList"
+
+'                                       Function RightClickColumnForGrid
+'                                       --------------------------------
+RegisterUserFunc "SAPGuiGrid", "RightClickColumn", "RightClickColumnForGrid"
+
+'                                       Function RightClickCellForGrid
+'                                       ------------------------------
+RegisterUserFunc "SAPGuiGrid", "RightClickCell", "RightClickCellForGrid"
+
+'                                       Function RightClickRowForGrid
+'                                       -----------------------------
+RegisterUserFunc "SAPGuiGrid", "RightClickRow", "RightClickRowForGrid"
+
+'                                       Function FindRowByTextInCell
+'                                       ----------------------------
+RegisterUserFunc "SAPGuiTable", "FindRowByTextInCell", "FindRowByTextInCell"
+RegisterUserFunc "SAPGuiGrid", "FindRowByTextInCell", "FindRowByTextInCell"
+
+'                                       Function SelectMenu
+'                                       -------------------
+RegisterUserFunc "SAPGuiWindow", "SelectMenu", "SelectMenuForWindow"
+RegisterUserFunc "SAPGuiToolbar", "SelectMenu", "SelectMenuForToolbar"
+
+'                                       Function SelectCellForTable
+'                                       ---------------------------
+RegisterUserFunc "SAPGuiTable", "SelectCell", "SelectCellForTable"
+
+'                                       Function SelectCellForGrid
+'                                       --------------------------
+RegisterUserFunc "SAPGuiGrid", "SelectCell", "SelectCellForGrid"
+
+'                                       Function SelectItemForTree
+'                                       --------------------------
+RegisterUserFunc "SAPGuiTree", "SelectItem", "SelectItemForTree"
+
+'                                       Function SelectColumnForTree
+'                                       ----------------------------
+RegisterUserFunc "SAPGuiTree", "SelectColumn", "SelectColumnForTree"
+
+'                                       Function ExtendNodeSelectionForTree
+'                                       -----------------------------------
+RegisterUserFunc "SAPGuiTree", "ExtendNodeSelection", "ExtendNodeSelectionForTree"
+
+'                                       Function GetText
+'                                       ----------------
+RegisterUserFunc "SAPGuiStatusBar", "GetText", "GetText", True
+
+'                                       Function ActivateForWindow
+'                                       --------------------------
+RegisterUserFunc "SAPGuiWindow", "Activate", "ActivateForWindow", True
+
+'										Function FillRecordByRow
+'										------------------------
+RegisterUserFunc "SAPGuiTable", "FillRecordByRow", "FillRecordByRow"
+
+'										Function FillRecordByColumnName
+'										-------------------------------
+RegisterUserFunc "SAPGuiTable", "FillRecordByColumnName", "FillRecordByColumnName"

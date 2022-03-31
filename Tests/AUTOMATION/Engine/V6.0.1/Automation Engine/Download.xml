@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Owners>
+  <OwnerId>431</OwnerId>
+  <OwnerType>TEST</OwnerType>
+  <Name><![CDATA[Automation Engine]]></Name>
+  <FSPath><![CDATA[Test\431\431\232]]></FSPath>
+  <QCPath><![CDATA[Subject\AUTOMATION\Engine\Automation Engine]]></QCPath>
+  <Owner>
+    <OwnerId>2273</OwnerId>
+    <OwnerType>USER_ASSETS</OwnerType>
+    <Name><![CDATA[Action1]]></Name>
+    <FSPath><![CDATA[Test\431\431\232]]></FSPath>
+    <QCPath><![CDATA[Subject\AUTOMATION\Engine\Automation Engine]]></QCPath>
+    <Relation>
+      <RelatedId>2275</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[TEST_Data]]></Name>
+      <FSPath><![CDATA[Test\431\431\232]]></FSPath>
+      <QCPath><![CDATA[Subject\AUTOMATION\Engine\Automation Engine]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>63</Order>
+    </Relation>
+  </Owner>
+  <Owner>
+    <OwnerId>431</OwnerId>
+    <OwnerType>TEST</OwnerType>
+    <Name><![CDATA[Automation Engine]]></Name>
+    <FSPath><![CDATA[Test\431\431\232]]></FSPath>
+    <QCPath><![CDATA[Subject\AUTOMATION\Engine\Automation Engine]]></QCPath>
+    <Relation>
+      <RelatedId>2273</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[Action1]]></Name>
+      <FSPath><![CDATA[Test\431\431\232]]></FSPath>
+      <QCPath><![CDATA[Subject\AUTOMATION\Engine\Automation Engine]]></QCPath>
+    </Relation>
+    <Relation>
+      <RelatedId>2274</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[Main Test Flow]]></Name>
+      <FSPath><![CDATA[Test\431\431\232]]></FSPath>
+      <QCPath><![CDATA[Subject\AUTOMATION\Engine\Automation Engine]]></QCPath>
+    </Relation>
+    <Relation>
+      <RelatedId>2275</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[TEST_Data]]></Name>
+      <FSPath><![CDATA[Test\431\431\232]]></FSPath>
+      <QCPath><![CDATA[Subject\AUTOMATION\Engine\Automation Engine]]></QCPath>
+    </Relation>
+  </Owner>
+</Owners>

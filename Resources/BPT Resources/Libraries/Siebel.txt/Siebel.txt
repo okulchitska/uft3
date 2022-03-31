@@ -1,0 +1,433 @@
+
+'********************************************************************************
+'	Siebel Functions
+'       -------------------------
+'
+'   Available Functions:
+'	* VerifyProperty - Verifies the value of a specified property (for all Siebel test objects)
+'	* OutputProperty - Returns the value of the specified property (for all Siebel test objects)
+'	* VerifyEnable - Verifies whether a specified object is enabled (for SiebText, SiebTextArea, SiebPicklist, SiebCheckbox, SiebButton, SiebCurrency, SiebCalendar, SiebCalculator, SiebRichText, SiebCTIToolbar, SblEdit, SblAdvancedEdit, SblButton, SblCheckbox, SblPicklist)
+'	* VerifyValue - Verifies the value of a specified object (for SiebPDQ, SiebPageTabs, SiebScreenViews, SiebViewApplets, SiebThreadbar, SiebText, SiebTextArea, SiebPicklist, SiebCheckbox, SiebTree, SiebCurrency, SiebCalendar, SiebCalculator, SiebRichText, SiebTaskAssistant, SiebCTIToolbar, SblEdit, SblAdvancedEdit, SblTreeView, SblCheckbox, SblPicklist)
+'	* GetValue - Returns the object value (for SiebPDQ, SiebPageTabs, SiebScreenViews, SiebViewApplets, SiebThreadbar, SiebText, SiebTextArea, SiebPicklist, SiebCheckbox, SiebTree, SiebCurrency, SiebCalendar, SiebCalculator, SiebRichText, SiebTaskAssistant, SiebCTIToolbar, SblEdit, SblAdvancedEdit, SblTreeView, SblCheckbox, SblPicklist)
+'
+'   Version: QTP8.2 November 2004
+'   ** In order to use the functions in this file, you must also load the "Common.txt" function library file.
+'
+'   ** Do not modify this file. It may be automatically updated by a later version, and then you will lose your changes.
+'********************************************************************************
+
+Option Explicit
+
+' Function VerifyIsEnabled
+' -------------------------
+' Verify whether a specified object is enabled
+' Returns - True - if the test object is enabled
+' 
+'@Description Checks whether the specified test object is enabled
+'@Documentation Check whether the <Test object name> <test object type> is enabled.
+Public Function VerifyIsEnabled (obj)
+	Dim enable_property
+	' Get the enabled property from the test object
+	enable_property = obj.GetROProperty("IsEnabled")
+	If enable_property <> 0 Then ' The value is True (anything but 0)
+		Reporter.ReportEvent micPass, "VerifyIsEnabled Succeeded", "The test object is enabled"
+		VerifyIsEnabled = True
+	Else
+		Reporter.ReportEvent micFail, "VerifyIsEnabled Failed", "The test object is NOT enabled"
+		VerifyIsEnabled = False
+	End If
+End Function
+
+' ******** Verify Functions - Start **************
+'--------------------------------------------------
+' In order to implement the 'VerifyValue' function for all QuickTest Professional test objects,
+' there is collection of functions that returns a specific property that represent 
+' the 'Value' of a test object.
+
+
+' Function VerifyActivePDQProperty
+' --------------------
+' Check the ActivePDQ property for a specified object
+' Returns - True - if the expected Value matches the actual value
+'Parameter: 
+'	ExpectedActivePDQ  - the expected value 
+'@Description Checks the object value
+'@Documentation Check whether the <Test object name> <test object type> value matches the expected value: <ExpectedActivePDQ>
+Public Function VerifyActivePDQ (obj, ExpectedActivePDQ)
+	VerifyActivePDQ = VerifyProperty (obj, "ActivePDQ", ExpectedActivePDQ)
+End Function
+
+' Function VerifyActiveScreenProperty
+' --------------------
+' Check the ActiveScreen property for a specified object
+' Returns - True - if the expected Value matches the actual value
+'Parameter: 
+'	ExpectedActiveScreen  - the expected value 
+'@Description Checks the object value
+'@Documentation Check whether the <Test object name> <test object type> value matches the expected value: <ExpectedActiveScreen>
+Public Function VerifyActiveScreen (obj, ExpectedActiveScreen)
+	VerifyActiveScreen = VerifyProperty (obj, "ActiveScreen", ExpectedActiveScreen)
+End Function
+
+' Function VerifyActiveViewProperty
+' --------------------
+' Check the ActiveView property for a specified object
+' Returns - True - if the expected Value matches the actual value
+'Parameter: 
+'	ExpectedActiveView  - the expected value 
+'@Description Checks the object value
+'@Documentation Check whether the <Test object name> <test object type> value matches the expected value: <ExpectedActiveView>
+Public Function VerifyActiveView (obj, ExpectedActiveView)
+	VerifyActiveView = VerifyProperty (obj, "ActiveView", ExpectedActiveView)
+End Function
+
+' Function VerifyActiveAppletProperty
+' --------------------
+' Check the ActiveApplet property for a specified object
+' Returns - True - if the expected Value matches the actual value
+'Parameter: 
+'	ExpectedActiveApplet  - the expected value 
+'@Description Checks the object value
+'@Documentation Check whether the <Test object name> <test object type> value matches the expected value: <ExpectedActiveApplet>
+Public Function VerifyActiveApplet (obj, ExpectedActiveApplet)
+	VerifyActiveApplet = VerifyProperty (obj, "ActiveApplet", ExpectedActiveApplet)
+End Function
+
+' Function VerifyActiveThreadItemProperty
+' --------------------
+' Check the ActiveThreadItem property for a specified object
+' Returns - True - if the expected Value matches the actual value
+'Parameter: 
+'	ExpectedActiveThreadItem  - the expected value 
+'@Description Checks the object value
+'@Documentation Check whether the <Test object name> <test object type> value matches the expected value: <ExpectedActiveThreadItem>
+Public Function VerifyActiveThreadItem (obj, ExpectedActiveThreadItem)
+	VerifyActiveThreadItem = VerifyProperty (obj, "ActiveThreadItem", ExpectedActiveThreadItem)
+End Function
+
+' Function VerifyActiveItemProperty
+' --------------------
+' Check the ActiveItem property for a specified object
+' Returns - True - if the expected Value matches the actual value
+'Parameter: 
+'	ExpectedActiveItem  - the expected value 
+'@Description Checks the object value
+'@Documentation Check whether the <Test object name> <test object type> value matches the expected value: <ExpectedActiveItem>
+Public Function VerifyActiveItem (obj, ExpectedActiveItem)
+	VerifyActiveItem = VerifyProperty (obj, "ActiveItem", ExpectedActiveItem)
+End Function
+
+' Function VerifyActiveWorkItemProperty
+' --------------------
+' Check the ActiveWorkItem property for a specified object
+' Returns - True - if the expected Value matches the actual value
+'Parameter: 
+'	ExpectedActiveWorkItem  - the expected value 
+'@Description Checks the object value
+'@Documentation Check whether the <Test object name> <test object type> value matches the expected value: <ExpectedActiveWorkItem>
+Public Function VerifyActiveWorkItem (obj, ExpectedActiveWorkItem)
+	VerifyActiveWorkItem = VerifyProperty (obj, "ActiveWorkItem", ExpectedActiveWorkItem)
+End Function
+
+' Function VerifyIsCheckedProperty
+' --------------------
+' Check the IsChecked property for a specified object
+' Returns - True - if the expected Value matches the actual value
+'Parameter: 
+'	ExpectedIsChecked  - the expected value 
+'@Description Checks the object value
+'@Documentation Check whether the <Test object name> <test object type> value matches the expected value: <ExpectedIsChecked>
+Public Function VerifyIsChecked (obj, ExpectedIsChecked)
+	VerifyIsChecked = VerifyProperty (obj, "IsChecked", ExpectedIsChecked)
+End Function
+
+' Function VerifyActiveTaskProperty
+' --------------------
+' Check the ActiveTask property for a specified object
+' Returns - True - if the expected Value matches the actual value
+'Parameter: 
+'	ExpectedActiveTask  - the expected value 
+'@Description Checks the object value
+'@Documentation Check whether the <Test object name> <test object type> value matches the expected value: <ExpectedActiveTask>
+Public Function VerifyActiveTask (obj, ExpectedActiveTask)
+	VerifyActiveTask = VerifyProperty (obj, "ActiveTask", ExpectedActiveTask)
+End Function
+
+' Function VerifyCurrentWorkItemProperty
+' --------------------
+' Check the CurrentWorkItem property for a specified object
+' Returns - True - if the expected Value matches the actual value
+'Parameter: 
+'	ExpectedCurrentWorkItem  - the expected value 
+'@Description Checks the object value
+'@Documentation Check whether the <Test object name> <test object type> value matches the expected value: <ExpectedCurrentWorkItem>
+Public Function VerifyCurrentWorkItem (obj, ExpectedCurrentWorkItem)
+	VerifyCurrentWorkItem = VerifyProperty (obj, "CurrentWorkItem", ExpectedCurrentWorkItem)
+End Function
+
+' Function VerifySelectedPathProperty
+' --------------------
+' Check the 'selected path' property for a specified object
+' Returns - True - if the expected Value matches the actual value
+'Parameter: 
+'	ExpectedSelectedPath  - the expected value 
+'@Description Checks the object value
+'@Documentation Check whether the <Test object name> <test object type> value matches the expected value: <ExpectedSelectedPath>
+Public Function VerifySelectedPath (obj, ExpectedSelectedPath)
+	VerifySelectedPath = VerifyProperty (obj, "selected path", ExpectedSelectedPath)
+End Function
+
+' ******** Verify Functions - End **************
+
+' ******** GetValue Functions - Start ***********
+
+' Function GetActivePDQProperty
+' --------------------------
+' Return the object 'ActivePDQ' property
+'
+'@Description Returns the Object value
+'@Documentation Return the <Test object name> <test object type> value.
+Public Function GetActivePDQProperty (obj)
+	GetActivePDQProperty = obj.GetROProperty("ActivePDQ")
+End Function
+
+' Function GetActiveScreenProperty
+' --------------------------
+' Return the object 'ActiveScreen' property
+'
+'@Description Returns the Object value
+'@Documentation Return the <Test object name> <test object type> value.
+Public Function GetActiveScreenProperty (obj)
+	GetActiveScreenProperty = obj.GetROProperty("ActiveScreen")
+End Function
+
+' Function GetActiveViewProperty
+' --------------------------
+' Return the object 'ActiveView' property
+'
+'@Description Returns the Object value
+'@Documentation Return the <Test object name> <test object type> value.
+Public Function GetActiveViewProperty (obj)
+	GetActiveViewProperty = obj.GetROProperty("ActiveView")
+End Function
+
+' Function GetActiveAppletProperty
+' --------------------------
+' Return the object 'ActiveApplet' property
+'
+'@Description Returns the Object value
+'@Documentation Return the <Test object name> <test object type> value.
+Public Function GetActiveAppletProperty (obj)
+	GetActiveAppletProperty = obj.GetROProperty("ActiveApplet")
+End Function
+
+' Function GetActiveThreadItemProperty
+' --------------------------
+' Return the object 'ActiveThreadItem' property
+'
+'@Description Returns the Object value
+'@Documentation Return the <Test object name> <test object type> value.
+Public Function GetActiveThreadItemProperty (obj)
+	GetActiveThreadItemProperty = obj.GetROProperty("ActiveThreadItem")
+End Function
+
+' Function GetActiveItemProperty
+' --------------------------
+' Return the object 'ActiveItem' property
+'
+'@Description Returns the Object value
+'@Documentation Return the <Test object name> <test object type> value.
+Public Function GetActiveItemProperty (obj)
+	GetActiveItemProperty = obj.GetROProperty("ActiveItem")
+End Function
+
+' Function GetIsCheckedProperty
+' --------------------------
+' Return the object 'IsChecked' property
+'
+'@Description Returns the Object value
+'@Documentation Return the <Test object name> <test object type> value.
+Public Function GetIsCheckedProperty (obj)
+	GetIsCheckedProperty = obj.GetROProperty("IsChecked")
+End Function
+
+' Function GetActiveTreeItemProperty
+' --------------------------
+' Return the object 'ActiveTreeItem' property
+'
+'@Description Returns the Object value
+'@Documentation Return the <Test object name> <test object type> value.
+Public Function GetActiveTreeItemProperty (obj)
+	GetActiveTreeItemProperty = obj.GetROProperty("ActiveTreeItem")
+End Function
+
+' Function GetActiveTaskProperty
+' --------------------------
+' Return the object 'ActiveTask' property
+'
+'@Description Returns the Object value
+'@Documentation Return the <Test object name> <test object type> value.
+Public Function GetActiveTaskProperty (obj)
+	GetActiveTaskProperty = obj.GetROProperty("ActiveTask")
+End Function
+
+' Function GetCurrentWorkItemProperty
+' --------------------------
+' Return the object 'CurrentWorkItem' property
+'
+'@Description Returns the Object value
+'@Documentation Return the <Test object name> <test object type> value.
+Public Function GetCurrentWorkItemProperty (obj)
+	GetCurrentWorkItemProperty = obj.GetROProperty("CurrentWorkItem")
+End Function
+
+' Function GetSelectedPathProperty
+' --------------------------
+' Return the object 'selected path' property
+'
+'@Description Returns the Object value
+'@Documentation Return the <Test object name> <test object type> value.
+Public Function GetSelectedPathProperty (obj)
+	GetSelectedPathProperty = obj.GetROProperty("selected path")
+End Function
+
+' ******** GetValue functions - End ***********
+
+
+' *********************************************************************************************
+' *** 			Register the Functions
+' *********************************************************************************************
+
+' Register the "VerifyProperty" Function
+RegisterUserFunc "SiebAppliction" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SiebScreen" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SiebView" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SiebApplet" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SiebMenu" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SiebToolbar" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SiebPDQ" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SiebPageTabs" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SiebScreenViews" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SiebViewApplets" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SiebThreadbar" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SiebText" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SiebTextArea" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SiebPicklist" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SiebCheckbox" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SiebButton" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SiebList" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SiebTree" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SiebCurrency" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SiebCalendar" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SiebCalculator" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SiebRichText" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SiebTaskAssistant" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SiebCTIToolbar" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SblEdit" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SblAdvancedEdit" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SblButton" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SblTable" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SblTreeView" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SblTabStrip" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SblCheckbox" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SblPicklist" , "VerifyProperty" , "VerifyProperty"
+
+
+' Register the "OutputProperty" Function
+RegisterUserFunc "SiebAppliction" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SiebScreen" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SiebView" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SiebApplet" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SiebMenu" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SiebToolbar" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SiebPDQ" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SiebPageTabs" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SiebScreenViews" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SiebViewApplets" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SiebThreadbar" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SiebText" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SiebTextArea" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SiebPicklist" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SiebCheckbox" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SiebButton" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SiebList" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SiebTree" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SiebCurrency" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SiebCalendar" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SiebCalculator" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SiebRichText" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SiebTaskAssistant" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SiebCTIToolbar" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SblEdit" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SblAdvancedEdit" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SblButton" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SblTable" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SblTreeView" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SblTabStrip" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SblCheckbox" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SblPicklist" , "OutputProperty" , "OutputProperty"
+
+
+' Register the "VerifyValue" Function
+RegisterUserFunc "SiebPDQ" , "VerifyValue" , "VerifyActivePDQ"
+RegisterUserFunc "SiebPageTabs" , "VerifyValue" , "VerifyActiveScreen"
+RegisterUserFunc "SiebScreenViews" , "VerifyValue" , "VerifyActiveView"
+RegisterUserFunc "SiebViewApplets" , "VerifyValue" , "VerifyActiveApplet"
+RegisterUserFunc "SiebThreadbar" , "VerifyValue" , "VerifyActiveThreadItem"
+RegisterUserFunc "SiebText" , "VerifyValue" , "VerifyText"
+RegisterUserFunc "SiebTextArea" , "VerifyValue" , "VerifyText"
+RegisterUserFunc "SiebPicklist" , "VerifyValue" , "VerifyActiveItem"
+RegisterUserFunc "SiebCheckbox" , "VerifyValue" , "VerifyIsChecked"
+RegisterUserFunc "SiebTree" , "VerifyValue" , "VerifyActiveWorkItem"
+RegisterUserFunc "SiebCurrency" , "VerifyValue" , "VerifyText"
+RegisterUserFunc "SiebCalendar" , "VerifyValue" , "VerifyText"
+RegisterUserFunc "SiebCalculator" , "VerifyValue" , "VerifyText"
+RegisterUserFunc "SiebRichText" , "VerifyValue" , "VerifyText"
+RegisterUserFunc "SiebTaskAssistant" , "VerifyValue" , "VerifyActiveTask"
+RegisterUserFunc "SiebCTIToolbar" , "VerifyValue" , "VerifyCurrentWorkItem"
+RegisterUserFunc "SblEdit" , "VerifyValue" , "VerifyValue"
+RegisterUserFunc "SblAdvancedEdit" , "VerifyValue" , "VerifyValue"
+RegisterUserFunc "SblTreeView" , "VerifyValue" , "VerifySelectedPath"
+RegisterUserFunc "SblCheckbox" , "VerifyValue" , "VerifyValue"
+RegisterUserFunc "SblPicklist" , "VerifyValue" , "VerifyValue"
+
+' Register the "GetValue" Function
+RegisterUserFunc "SiebPDQ" , "GetValue" , "GetActivePDQProperty"
+RegisterUserFunc "SiebPageTabs" , "GetValue" , "GetActiveScreenProperty"
+RegisterUserFunc "SiebScreenViews" , "GetValue" , "GetActiveViewProperty"
+RegisterUserFunc "SiebViewApplets" , "GetValue" , "GetActiveAppletProperty"
+RegisterUserFunc "SiebThreadbar" , "GetValue" , "GetActiveThreadItemProperty"
+RegisterUserFunc "SiebText" , "GetValue" , "GetTextProperty"
+RegisterUserFunc "SiebTextArea" , "GetValue" , "GetTextProperty"
+RegisterUserFunc "SiebPicklist" , "GetValue" , "GetActiveItemProperty"
+RegisterUserFunc "SiebCheckbox" , "GetValue" , "GetIsCheckedProperty"
+RegisterUserFunc "SiebTree" , "GetValue" , "GetActiveTreeItemProperty"
+RegisterUserFunc "SiebCurrency" , "GetValue" , "GetTextProperty"
+RegisterUserFunc "SiebCalendar" , "GetValue" , "GetTextProperty"
+RegisterUserFunc "SiebCalculator" , "GetValue" , "GetTextProperty"
+RegisterUserFunc "SiebRichText" , "GetValue" , "GetTextProperty"
+RegisterUserFunc "SiebTaskAssistant" , "GetValue" , "GetActiveTaskProperty"
+RegisterUserFunc "SiebCTIToolbar" , "GetValue" , "GetCurrentWorkItemProperty"
+RegisterUserFunc "SblEdit" , "GetValue" , "GetValueProperty"
+RegisterUserFunc "SblAdvancedEdit" , "GetValue" , "GetValueProperty"
+RegisterUserFunc "SblTreeView" , "GetValue" , "GetSelectedPathProperty"
+RegisterUserFunc "SblCheckbox" , "GetValue" , "GetValueProperty"
+RegisterUserFunc "SblPicklist" , "GetValue" , "GetValueProperty"
+
+
+' Register the "VerifyEnable" Function
+RegisterUserFunc "SiebText" , "VerifyEnable" , "VerifyIsEnabled"
+RegisterUserFunc "SiebTextArea" , "VerifyEnable" , "VerifyIsEnabled"
+RegisterUserFunc "SiebPicklist" , "VerifyEnable" , "VerifyIsEnabled"
+RegisterUserFunc "SiebCheckbox" , "VerifyEnable" , "VerifyIsEnabled"
+RegisterUserFunc "SiebButton" , "VerifyEnable" , "VerifyIsEnabled"
+RegisterUserFunc "SiebCurrency" , "VerifyEnable" , "VerifyIsEnabled"
+RegisterUserFunc "SiebCalendar" , "VerifyEnable" , "VerifyIsEnabled"
+RegisterUserFunc "SiebCalculator" , "VerifyEnable" , "VerifyIsEnabled"
+RegisterUserFunc "SiebRichText" , "VerifyEnable" , "VerifyIsEnabled"
+RegisterUserFunc "SiebCTIToolbar" , "VerifyEnable" , "VerifyIsEnabled"
+RegisterUserFunc "SblEdit" , "VerifyEnable" , "VerifyDisabled"
+RegisterUserFunc "SblAdvancedEdit" , "VerifyEnable" , "VerifyDisabled"
+RegisterUserFunc "SblButton" , "VerifyEnable" , "VerifyDisabled"
+RegisterUserFunc "SblCheckbox" , "VerifyEnable" , "VerifyDisabled"
+RegisterUserFunc "SblPicklist" , "VerifyEnable" , "VerifyDisabled"

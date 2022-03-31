@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Owners>
+  <OwnerId>186</OwnerId>
+  <OwnerType>TEST</OwnerType>
+  <Name><![CDATA[OR Mapping Tool]]></Name>
+  <FSPath><![CDATA[Test\186\186\186]]></FSPath>
+  <QCPath><![CDATA[Subject\AUTOMATION\Engine\OR Mapping Tool]]></QCPath>
+  <Owner>
+    <OwnerId>1522</OwnerId>
+    <OwnerType>USER_ASSETS</OwnerType>
+    <Name><![CDATA[Action1]]></Name>
+    <FSPath><![CDATA[Test\186\186\186]]></FSPath>
+    <QCPath><![CDATA[Subject\AUTOMATION\Engine\OR Mapping Tool]]></QCPath>
+    <Relation>
+      <RelatedId>1521</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[TEST_Data]]></Name>
+      <FSPath><![CDATA[Test\186\186\186]]></FSPath>
+      <QCPath><![CDATA[Subject\AUTOMATION\Engine\OR Mapping Tool]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>2</Order>
+    </Relation>
+  </Owner>
+  <Owner>
+    <OwnerId>186</OwnerId>
+    <OwnerType>TEST</OwnerType>
+    <Name><![CDATA[OR Mapping Tool]]></Name>
+    <FSPath><![CDATA[Test\186\186\186]]></FSPath>
+    <QCPath><![CDATA[Subject\AUTOMATION\Engine\OR Mapping Tool]]></QCPath>
+    <Relation>
+      <RelatedId>1521</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[TEST_Data]]></Name>
+      <FSPath><![CDATA[Test\186\186\186]]></FSPath>
+      <QCPath><![CDATA[Subject\AUTOMATION\Engine\OR Mapping Tool]]></QCPath>
+    </Relation>
+    <Relation>
+      <RelatedId>1522</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[Action1]]></Name>
+      <FSPath><![CDATA[Test\186\186\186]]></FSPath>
+      <QCPath><![CDATA[Subject\AUTOMATION\Engine\OR Mapping Tool]]></QCPath>
+    </Relation>
+    <Relation>
+      <RelatedId>1520</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[Main Test Flow]]></Name>
+      <FSPath><![CDATA[Test\186\186\186]]></FSPath>
+      <QCPath><![CDATA[Subject\AUTOMATION\Engine\OR Mapping Tool]]></QCPath>
+    </Relation>
+  </Owner>
+</Owners>

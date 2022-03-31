@@ -1,0 +1,182 @@
+
+'********************************************************************************
+'	.Net Functions
+'       -------------------------
+'
+'   Available Functions:
+'	* VerifyProperty - Verifies the value of a specified property (for all .Net test objects)
+'	* OutputProperty - Returns the value of the specified property (for all .Net test objects)
+'	* VerifyEnable - Verifies whether a specified object is enabled (for all .Net test objects)
+'	* VerifyValue - Verifies the value of a specified object (for SwfCalendar ,SwfCheckBox ,SwfComboBox ,SwfEdit ,SwfEditor ,SwfLabel ,SwfList ,SwfListView ,SwfRadioButton ,SwfSpin ,SwfTab ,SwfTreeView ,WbfCalendar ,WbfTabStrip ,WbfTreeView)
+'	* GetValue - Returns the object value (for SwfCalendar ,SwfCheckBox ,SwfComboBox ,SwfEdit ,SwfEditor ,SwfLabel ,SwfList ,SwfListView ,SwfRadioButton ,SwfSpin ,SwfTab ,SwfTreeView ,WbfCalendar ,WbfTabStrip ,WbfTreeView)
+'
+'   Version: QTP8.2 November 2004
+'   ** In order to use the functions in this file, you must also load the "Common.txt" function library file.
+'
+'   ** Do not modify this file. It may be automatically updated by a later version, and then you will lose your changes.
+'********************************************************************************
+
+Option Explicit
+
+' Function VerifySelectedDateProperty
+' --------------------
+' Check the selected_date property for a specified object
+' Returns - True - if the expected Value matches the actual value
+'Parameter:
+'	ExpectedSelectedDate  - the expected value
+'@Description Checks the object value
+'@Documentation Check whether the <Test object name> <test object type> value matches the expected value: <ExpectedSelectedDate>
+Public Function VerifySelectedDate (obj, ExpectedSelectedDate)
+	VerifySelectedDate = VerifyProperty (obj, "selected date", ExpectedSelectedDate)
+End Function
+
+' Function VerifySelectedItemProperty
+' --------------------
+' Check the selected_item property for a specified object
+' Returns - True - if the expected Value matches the actual value
+'Parameter:
+'	ExpectedSelectedItem  - the expected value
+'@Description Checks the object value
+'@Documentation Check whether the <Test object name> <test object type> value matches the expected value: <ExpectedSelectedItem>
+Public Function VerifySelectedItem (obj, ExpectedSelectedItem)
+	VerifySelectedItem = VerifyProperty (obj, "selected item", ExpectedSelectedItem)
+End Function
+
+
+' Function GetSelectedDateProperty
+' --------------------------
+' Return the object 'selected date' property
+'
+'@Description Returns the Object value
+'@Documentation Return the <Test object name> <test object type> value.
+Public Function GetSelectedDateProperty (obj)
+	GetSelectedDateProperty = obj.GetROProperty("selected date")
+End Function
+
+
+' Function GetSelectedItemProperty
+' --------------------------
+' Return the object 'selected item' property
+'
+'@Description Returns the Object value
+'@Documentation Return the <Test object name> <test object type> value.
+Public Function GetSelectedItemProperty (obj)
+	GetSelectedItemProperty = obj.GetROProperty("selected item")
+End Function
+
+
+' *********************************************************************************************
+' *** 			Register the Functions
+' *********************************************************************************************
+
+' Register the "VerifyProperty" Function
+RegisterUserFunc "SwfButton" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SwfCalendar" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SwfCheckBox" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SwfComboBox" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SwfEdit" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SwfEditor" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SwfLabel" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SwfList" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SwfListView" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SwfObject" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SwfRadioButton" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SwfScrollBar" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SwfSpin" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SwfStatusBar" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SwfTab" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SwfTable" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SwfToolbar" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SwfTreeView" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "SwfWindow" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "WbfCalendar" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "WbfGrid" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "WbfTabStrip" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "WbfToolbar" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "WbfTreeView" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "WbfUltraGrid" , "VerifyProperty" , "VerifyProperty"
+
+
+' Register the "OutputProperty" Function
+RegisterUserFunc "SwfButton" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SwfCalendar" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SwfCheckBox" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SwfComboBox" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SwfEdit" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SwfEditor" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SwfLabel" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SwfList" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SwfListView" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SwfObject" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SwfRadioButton" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SwfScrollBar" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SwfSpin" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SwfStatusBar" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SwfTab" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SwfTable" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SwfToolbar" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SwfTreeView" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "SwfWindow" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "WbfCalendar" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "WbfGrid" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "WbfTabStrip" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "WbfToolbar" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "WbfTreeView" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "WbfUltraGrid" , "OutputProperty" , "OutputProperty"
+
+
+' Register the "VerifyValue" Function
+RegisterUserFunc "SwfCalendar" , "VerifyValue" , "VerifyDate"
+RegisterUserFunc "SwfCheckBox" , "VerifyValue" , "VerifyChecked"
+RegisterUserFunc "SwfComboBox" , "VerifyValue" , "VerifyText"
+RegisterUserFunc "SwfEdit" , "VerifyValue" , "VerifyText"
+RegisterUserFunc "SwfEditor" , "VerifyValue" , "VerifyText"
+RegisterUserFunc "SwfLabel" , "VerifyValue" , "VerifyText"
+RegisterUserFunc "SwfList" , "VerifyValue" , "VerifySelection"
+RegisterUserFunc "SwfListView" , "VerifyValue" , "VerifySelection"
+RegisterUserFunc "SwfRadioButton" , "VerifyValue" , "VerifyChecked"
+RegisterUserFunc "SwfSpin" , "VerifyValue" , "VerifyPosition"
+RegisterUserFunc "SwfTab" , "VerifyValue" , "VerifySelection"
+RegisterUserFunc "SwfTreeView" , "VerifyValue" , "VerifySelection"
+RegisterUserFunc "WbfCalendar" , "VerifyValue" , "VerifySelectedDate"
+RegisterUserFunc "WbfTabStrip" , "VerifyValue" , "VerifySelectedItem"
+RegisterUserFunc "WbfTreeView" , "VerifyValue" , "VerifySelectedItem"
+
+' Register the "GetValue" Function
+RegisterUserFunc "SwfCalendar" , "GetValue" , "GetDateProperty"
+RegisterUserFunc "SwfCheckBox" , "GetValue" , "GetCheckedProperty"
+RegisterUserFunc "SwfComboBox" , "GetValue" , "GetTextProperty"
+RegisterUserFunc "SwfEdit" , "GetValue" , "GetTextProperty"
+RegisterUserFunc "SwfEditor" , "GetValue" , "GetTextProperty"
+RegisterUserFunc "SwfLabel" , "GetValue" , "GetTextProperty"
+RegisterUserFunc "SwfList" , "GetValue" , "GetSelectionProperty"
+RegisterUserFunc "SwfListView" , "GetValue" , "GetSelectionProperty"
+RegisterUserFunc "SwfRadioButton" , "GetValue" , "GetCheckedProperty"
+RegisterUserFunc "SwfSpin" , "GetValue" , "GetPositionProperty"
+RegisterUserFunc "SwfTab" , "GetValue" , "GetSelectionProperty"
+RegisterUserFunc "SwfTreeView" , "GetValue" , "GetSelectionProperty"
+RegisterUserFunc "WbfCalendar" , "GetValue" , "GetSelectedDateProperty"
+RegisterUserFunc "WbfTabStrip" , "GetValue" , "GetSelectedItemProperty"
+RegisterUserFunc "WbfTreeView" , "GetValue" , "GetSelectedItemProperty"
+
+
+' Register the "VerifyEnable" Function
+RegisterUserFunc "SwfButton" , "VerifyEnable" , "VerifyEnabled"
+RegisterUserFunc "SwfCalendar" , "VerifyEnable" , "VerifyEnabled"
+RegisterUserFunc "SwfCheckBox" , "VerifyEnable" , "VerifyEnabled"
+RegisterUserFunc "SwfComboBox" , "VerifyEnable" , "VerifyEnabled"
+RegisterUserFunc "SwfEdit" , "VerifyEnable" , "VerifyEnabled"
+RegisterUserFunc "SwfEditor" , "VerifyEnable" , "VerifyEnabled"
+RegisterUserFunc "SwfLabel" , "VerifyEnable" , "VerifyEnabled"
+RegisterUserFunc "SwfList" , "VerifyEnable" , "VerifyEnabled"
+RegisterUserFunc "SwfListView" , "VerifyEnable" , "VerifyEnabled"
+RegisterUserFunc "SwfObject" , "VerifyEnable" , "VerifyEnabled"
+RegisterUserFunc "SwfRadioButton" , "VerifyEnable" , "VerifyEnabled"
+RegisterUserFunc "SwfScrollBar" , "VerifyEnable" , "VerifyEnabled"
+RegisterUserFunc "SwfSpin" , "VerifyEnable" , "VerifyEnabled"
+RegisterUserFunc "SwfStatusBar" , "VerifyEnable" , "VerifyEnabled"
+RegisterUserFunc "SwfTab" , "VerifyEnable" , "VerifyEnabled"
+RegisterUserFunc "SwfTable" , "VerifyEnable" , "VerifyEnabled"
+RegisterUserFunc "SwfToolbar" , "VerifyEnable" , "VerifyEnabled"
+RegisterUserFunc "SwfTreeView" , "VerifyEnable" , "VerifyEnabled"
+RegisterUserFunc "SwfWindow" , "VerifyEnable" , "VerifyEnabled"

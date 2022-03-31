@@ -1,0 +1,24 @@
+
+'********************************************************************************
+'	PeopleSoft Functions
+'       -------------------------
+'
+'   Available Functions:
+'	
+'   Version: QTP8.2 November 2004
+'
+'   ** Do not modify this file. It may be automatically updated by a later version, and then you will lose your changes.
+'********************************************************************************
+
+Option Explicit
+
+' Function InvokePeopleSoft
+' --------------------
+' Invoke the PeopleSoft Application
+'Parameter: 
+'	URL  - The people application URL
+'@Description Invoke the PeopleSoft Application
+'@Documentation Invoke the PeopleSoft application from <location>
+Public Function InvokePeopleSoft (location)
+	SystemUtil.Run "iexplore.exe", location
+End Function

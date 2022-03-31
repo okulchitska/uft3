@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Owners>
+  <OwnerId>20</OwnerId>
+  <OwnerType>TEST</OwnerType>
+  <Name><![CDATA[Automation Engine V4.5 No Perf]]></Name>
+  <FSPath><![CDATA[Test\20\20\228]]></FSPath>
+  <QCPath><![CDATA[Subject\AUTOMATION\Engine\Automation Engine V4.5 No Perf]]></QCPath>
+  <Owner>
+    <OwnerId>1052</OwnerId>
+    <OwnerType>USER_ASSETS</OwnerType>
+    <Name><![CDATA[Action1]]></Name>
+    <FSPath><![CDATA[Test\20\20\228]]></FSPath>
+    <QCPath><![CDATA[Subject\AUTOMATION\Engine\Automation Engine V4.5 No Perf]]></QCPath>
+    <Relation>
+      <RelatedId>1054</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[TEST_Data]]></Name>
+      <FSPath><![CDATA[Test\20\20\228]]></FSPath>
+      <QCPath><![CDATA[Subject\AUTOMATION\Engine\Automation Engine V4.5 No Perf]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>1</Order>
+    </Relation>
+  </Owner>
+  <Owner>
+    <OwnerId>20</OwnerId>
+    <OwnerType>TEST</OwnerType>
+    <Name><![CDATA[Automation Engine V4.5 No Perf]]></Name>
+    <FSPath><![CDATA[Test\20\20\228]]></FSPath>
+    <QCPath><![CDATA[Subject\AUTOMATION\Engine\Automation Engine V4.5 No Perf]]></QCPath>
+    <Relation>
+      <RelatedId>1052</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[Action1]]></Name>
+      <FSPath><![CDATA[Test\20\20\228]]></FSPath>
+      <QCPath><![CDATA[Subject\AUTOMATION\Engine\Automation Engine V4.5 No Perf]]></QCPath>
+    </Relation>
+    <Relation>
+      <RelatedId>1054</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[TEST_Data]]></Name>
+      <FSPath><![CDATA[Test\20\20\228]]></FSPath>
+      <QCPath><![CDATA[Subject\AUTOMATION\Engine\Automation Engine V4.5 No Perf]]></QCPath>
+    </Relation>
+    <Relation>
+      <RelatedId>1053</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[Main Test Flow]]></Name>
+      <FSPath><![CDATA[Test\20\20\228]]></FSPath>
+      <QCPath><![CDATA[Subject\AUTOMATION\Engine\Automation Engine V4.5 No Perf]]></QCPath>
+    </Relation>
+  </Owner>
+</Owners>

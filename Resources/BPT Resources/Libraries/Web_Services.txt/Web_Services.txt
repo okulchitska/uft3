@@ -1,0 +1,212 @@
+
+'********************************************************************************
+'	Web services Functions
+'	-------------------------
+'
+'   Available Functions:
+'	* VerifyXMLFile - Checks whether the content of a specified XML file matches the content of another specified XML file.
+'	* VerifyXMLValue- Checks whether the content of the element with the supplied XPath has the expected value.
+'	* ValidateXML - Checks whether the specified XML object conforms to the specified schema file.
+'	* OutputXMLValue - Returns the value of the element in the specified XPath.
+'	* CreateXMLFromFile - Creates an XML object from the specified XML file.
+'	* SetToolkit - Sets the toolkit to be used during the run session.
+'
+'   Version: QTP 9.1
+'
+'   ** Do not modify this file. It may be automatically updated by a later version, and then you will lose your changes.
+'********************************************************************************
+
+Option Explicit
+
+' Function VerifyXMLFile
+' -----------------------
+' Compare two XML files.
+'
+'@Description Checks whether the content of a specified XML file matches the content of another specified XML file.
+'@Documentation Check whether the content of <XMLFile> matches the content of <ExpectedXMLFile>.
+Public Function VerifyXMLFile(XMLFile, ExpectedXMLFile)
+	Dim ActualXML
+	Dim ExpectedXML
+	Dim ResultXML
+	Set ActualXML = XMLUtil.CreateXMLFromFile(XMLFile)
+	Set ExpectedXML = XMLUtil.CreateXMLFromFile(ExpectedXMLFile)
+	VerifyXMLFile = ActualXML.Compare(ExpectedXML, ResultXML)
+End Function
+
+
+' Function VerifyXMLValue
+' -----------------------
+' Compare the content of the element for the supplied XPath.
+'
+'@Description Checks whether the content of the element with the supplied XPath has the expected value.
+'@Documentation Checks whether the content of <XPath> has the value <ExpectedValue>.
+Public Function VerifyXMLValue(XMLObject, XPath, ExpectedValue)
+	VerifyXMLValue = XMLObject.GetRootElement.CheckXPath(XPath, ExpectedValue)
+End Function
+
+
+' Function ValidateXML
+' -----------------------
+' Check whether the specified XML object conforms to the specified schema file.
+'
+'@Description Checks whether the specified XML object conforms to the specified schema file.
+'@Documentation Checks whether <XMLObject> conforms to the <XMLSchemaFile> schema file.
+Public Function ValidateXML(XMLObject, XMLScheamFile)
+	ValidateXML = XMLObject.Validate(XMLSchemaFile)
+End Function
+
+
+' Function OutputXMLValue
+' -----------------------
+' Return the value of the element in the specified XPath.
+'
+'@Description Returns the value of the element in the specified XPath.
+'@Documentation Return the value of the element in <XPath>.
+Public Function OutputXMLValue(XMLObject, XPath)
+	OutputXMLValue = XMLObject.GetRootElement.GetValueByXPath(XPath)
+End Function
+
+
+' Function CreateXMLFromFile
+' -----------------------
+' Create an XML object from the specified XML file.
+'
+'@Description Creates an XML object from the specified XML file.
+'@Documentation Creates an XML object from the <XMLFilePath>.
+Public Function CreateXMLFromFile(XMLFile)
+	Set CreateXMLFromFile = XMLUtil.CreateXMLFromFile(XMLFile)
+End Function
+
+
+' Function SetToolkit
+' -----------------------
+' Set the toolkit to be used during the run session.
+'
+'@Description Sets the toolkit to be used during the run session.
+'@Documentation Use the <ToolkitName> toolkit during the run session.
+Public Sub SetToolkit(ToolkitName)
+	Dim qtApp
+	Dim qtWSSettings
+	Dim qtCurDocument
+	Set qtApp = CreateObject("QuickTest.Application") ' Get the Application object
+	' Get the Current Document object
+	If qtApp.CurrentDocumentType = "Test" Then
+		Set qtCurDocument = qtApp.Test
+	Else
+		Set qtCurDocument = qtApp.BusinessComponent
+	End If
+	Set qtWSSettings = qtCurDocument.Settings.WebServices ' Return the WS Settings object for the current test
+	' Configure the Test Web Services settings:
+	qtWSSettings.RunToolkit = ToolkitName
+	Set qtWSSettings = Nothing ' Release the WS Settings object
+	Set qtCurDocument = Nothing ' Release the Current Document object
+	Set qtApp = Nothing ' Release the Application object
+End Sub
+
+
+
+'----------------------------------------------
+'  Attachments API
+
+'@Description Adds the specified file as an attachment to the next Web service communication.
+Public Sub  AddAttachment(test_object, FilePath,  AttachmentType)
+	test_object.AddAttachment FilePath, AttachmentType
+End Sub
+RegisterUserFunc "WebService", "AddAttachment", "AddAttachment"
+
+'@Description Returns an array containing the paths to the attachments that were added by the Web service to the last communication.
+Public Function GetAttachments(test_object)
+	GetAttachments = test_object.GetAttachments
+End Function
+RegisterUserFunc "WebService", "GetAttachments", "GetAttachments"
+
+'@Description Returns an attachments count.
+Public Function GetAttachmentsCount(test_object)
+	GetAttachmentsCount = test_object.Attachments.Count
+End Function
+RegisterUserFunc "WebService", "GetAttachmentsCount", "GetAttachmentsCount"
+
+
+'---------------------------------------------  
+'Headers API
+
+'@Description  Appends the specified header to all subsequent Web service communications.
+Public Sub AddHeader(test_object, Param1, Param2, HeaderType)
+	test_object.AddHeader Param1, Param2, HeaderType
+End Sub
+RegisterUserFunc "WebService", "AddHeader", "AddHeader"
+
+'@Description  Stops headers from being appended to subsequent Web service communications and clears the header list.
+Public Sub ClearHeaders(test_object, HeaderType)
+	test_object.ClearHeaders HeaderType
+End Sub
+RegisterUserFunc "WebService", "ClearHeaders", "ClearHeaders"
+
+'@Description  Returns the specified header from the most recent Web service communication.
+Public Function GetHeader(test_object, HeaderItem, ProtocolType, ExtractValue)
+	GetHeader = test_object.GetHeader(HeaderItem, ProtocolType, ExtractValue)
+End Function
+RegisterUserFunc "WebService", "GetHeader", "GetHeader"
+
+'@Description  Returns all of the headers that were appended in the most recent Web service communication.
+Public Function GetHeaders(test_object, ProtocolType)
+	GetHeader =  test_object.GetHeaders (ProtocolType)
+End Function
+RegisterUserFunc "WebService", "GetHeaders", "GetHeaders"
+
+'@Description Returns a headers count.
+Public Function GetHeadersCount(test_object, ProtocolType)
+	Select Case ProtocolType
+		Case "HTTP"
+			GetHeadersCount = test_object.Headers.HTTPHeadersCount
+		Case "SOAP"
+			GetHeadersCount = test_object.Headers.SOAPHeadersCount
+		Case else
+			GetHeadersCount = 0
+	End Select
+End Function
+RegisterUserFunc "WebService", "GetHeadersCount", "GetHeadersCount"
+
+
+'---------------------------------------------  
+'Security  API
+
+'@Description  Adds the specified security token to a QuickTest list for use with subsequent Web Service operations.
+Public Sub AddSecurityToken(test_object, TokenType, Param1, Param2, ExtraData)
+	test_object.AddSecurityToken TokenType, Param1, Param2, ExtraData
+End Sub
+RegisterUserFunc "WebService", "AddSecurityToken", "AddSecurityToken"
+
+'@Description  Removes all Web service security tokens from the QuickTest list.
+Public Sub ClearSecurityTokens(test_object)
+	test_object.ClearSecurityTokens
+End Sub
+RegisterUserFunc "WebService", "ClearSecurityTokens", "ClearSecurityTokens"
+
+'@Description  Protects subsequent Web Service operation messages using the specified security token.
+Public Sub AddMessageProtection(test_object, ProtectionType, TokenId, ProtectDefault, XmlElementsNames)
+	test_object.AddMessageProtection ProtectionType, TokenId, ProtectDefault, XmlElementsNames
+End Sub
+RegisterUserFunc "WebService", "AddMessageProtection", "AddMessageProtection"
+
+
+'---------------------------------------------  
+'Configuration API
+
+'@Description  Uses the specified proxy server connection information for running Web Service operations.
+Public Sub SetProxy(test_object, Host, Port, UserName,Password,Domain)
+	test_object.SetProxy Host, Port, UserName,Password,Domain
+End Sub
+RegisterUserFunc "WebService", "SetProxy", "SetProxy"
+
+'@Description  Applies the configuration settings from the specified files to the Web service client.
+Public Sub SetClientConfiguration(test_object, AppConfig, PolicyConfig, ExtraData)
+	test_object.SetClientConfiguration AppConfig, PolicyConfig, ExtraData
+End Sub
+RegisterUserFunc "WebService", "SetClientConfiguration", "SetClientConfiguration"
+
+'@Description  Ends the usage of the configuration settings that were applied from a previous SetClientConfiguration statement.
+Public Sub ClearClientConfiguration(test_object)
+	test_object.ClearClientConfiguration
+End Sub
+RegisterUserFunc "WebService", "ClearClientConfiguration", "ClearClientConfiguration"

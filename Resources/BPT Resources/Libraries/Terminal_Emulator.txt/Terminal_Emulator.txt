@@ -1,0 +1,64 @@
+
+'********************************************************************************
+'	Terminal Emulator Functions
+'       -------------------------
+'
+'   Available Functions:
+'	* VerifyProperty - Verifies the value of a specified property (for all TE test objects)
+'	* OutputProperty - Returns the value of the specified property (for all TE test objects)
+'	* VerifyEnable - Verifies whether a specified object is enabled (for TeField)
+'	* VerifyValue - Verifies the value of a specified object (for TeField)
+'	* GetValue - Returns the object value (for TeField)
+'
+'   Version: QTP8.2 November 2004
+'   ** In order to use the functions in this file, you must also load the "Common.txt" function library file.
+'
+'   ** Do not modify this file. It may be automatically updated by a later version, and then you will lose your changes.
+'********************************************************************************
+
+Option Explicit
+
+' Function VerifyProtected
+' -------------------------
+'  Verify whether a specified object is enabled (not protected)
+' Returns - True - if the test object is enabled (not protected)
+'
+'@Description Checks whether the specified test object is enabled
+'@Documentation Check whether the <Test object name> <test object type> is enabled.
+Public Function VerifyProtected (obj)
+	Dim enable_property
+	' Get the protected property from the test pbject
+	enable_property = obj.GetROProperty("protected")
+	If enable_property = 0 Then ' The value is False (0) - Not protected - Enabled
+		Reporter.ReportEvent micPass, "VerifyProtected Succeeded", "The test object is enabled"
+		VerifyProtected = True
+	Else
+		Reporter.ReportEvent micFail, "VerifyProtected Failed", "The test object is NOT enabled"
+		VerifyProtected = False
+	End If
+End Function
+
+' *********************************************************************************************
+' *** 			Register the Functions
+' *********************************************************************************************
+
+' Register the "VerifyProperty" Function
+RegisterUserFunc "TeField" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "TeScreen" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "TeWindow" , "VerifyProperty" , "VerifyProperty"
+
+
+' Register the "OutputProperty" Function
+RegisterUserFunc "TeField" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "TeScreen" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "TeWindow" , "OutputProperty" , "OutputProperty"
+
+
+' Register the "VerifyValue" Function
+RegisterUserFunc "TeField" , "VerifyValue" , "VerifyText"
+
+' Register the "GetValue" Function
+RegisterUserFunc "TeField" , "GetValue" , "GetTextProperty"
+
+' Register the "VerifyEnable" Function
+RegisterUserFunc "TeField" , "VerifyEnable" , "VerifyProtected"

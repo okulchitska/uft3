@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Owners>
+  <OwnerId>355</OwnerId>
+  <OwnerType>TEST</OwnerType>
+  <Name><![CDATA[Table-Info]]></Name>
+  <FSPath><![CDATA[Test\355\355\355]]></FSPath>
+  <QCPath><![CDATA[Subject\AUTOMATION\Engine\Table-Info]]></QCPath>
+  <Owner>
+    <OwnerId>355</OwnerId>
+    <OwnerType>TEST</OwnerType>
+    <Name><![CDATA[Table-Info]]></Name>
+    <FSPath><![CDATA[Test\355\355\355]]></FSPath>
+    <QCPath><![CDATA[Subject\AUTOMATION\Engine\Table-Info]]></QCPath>
+    <Relation>
+      <RelatedId>2005</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[Action1]]></Name>
+      <FSPath><![CDATA[Test\355\355\355]]></FSPath>
+      <QCPath><![CDATA[Subject\AUTOMATION\Engine\Table-Info]]></QCPath>
+    </Relation>
+    <Relation>
+      <RelatedId>2004</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[TEST_Data]]></Name>
+      <FSPath><![CDATA[Test\355\355\355]]></FSPath>
+      <QCPath><![CDATA[Subject\AUTOMATION\Engine\Table-Info]]></QCPath>
+    </Relation>
+    <Relation>
+      <RelatedId>2003</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[Main Test Flow]]></Name>
+      <FSPath><![CDATA[Test\355\355\355]]></FSPath>
+      <QCPath><![CDATA[Subject\AUTOMATION\Engine\Table-Info]]></QCPath>
+    </Relation>
+  </Owner>
+  <Owner>
+    <OwnerId>2005</OwnerId>
+    <OwnerType>USER_ASSETS</OwnerType>
+    <Name><![CDATA[Action1]]></Name>
+    <FSPath><![CDATA[Test\355\355\355]]></FSPath>
+    <QCPath><![CDATA[Subject\AUTOMATION\Engine\Table-Info]]></QCPath>
+    <Relation>
+      <RelatedId>2004</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[TEST_Data]]></Name>
+      <FSPath><![CDATA[Test\355\355\355]]></FSPath>
+      <QCPath><![CDATA[Subject\AUTOMATION\Engine\Table-Info]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>5</Order>
+    </Relation>
+  </Owner>
+</Owners>

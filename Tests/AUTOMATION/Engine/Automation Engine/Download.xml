@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Owners>
+  <OwnerId>1495</OwnerId>
+  <OwnerType>TEST</OwnerType>
+  <Name><![CDATA[Automation Engine]]></Name>
+  <FSPath><![CDATA[Test\1495\1495\538]]></FSPath>
+  <QCPath><![CDATA[Subject\AUTOMATION\Engine\Automation Engine]]></QCPath>
+  <Owner>
+    <OwnerId>5189</OwnerId>
+    <OwnerType>USER_ASSETS</OwnerType>
+    <Name><![CDATA[Action1]]></Name>
+    <FSPath><![CDATA[Test\1495\1495\538]]></FSPath>
+    <QCPath><![CDATA[Subject\AUTOMATION\Engine\Automation Engine]]></QCPath>
+    <Relation>
+      <RelatedId>5191</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[TEST_Data]]></Name>
+      <FSPath><![CDATA[Test\1495\1495\538]]></FSPath>
+      <QCPath><![CDATA[Subject\AUTOMATION\Engine\Automation Engine]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>1</Order>
+    </Relation>
+  </Owner>
+  <Owner>
+    <OwnerId>1495</OwnerId>
+    <OwnerType>TEST</OwnerType>
+    <Name><![CDATA[Automation Engine]]></Name>
+    <FSPath><![CDATA[Test\1495\1495\538]]></FSPath>
+    <QCPath><![CDATA[Subject\AUTOMATION\Engine\Automation Engine]]></QCPath>
+    <Relation>
+      <RelatedId>5190</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[Main Test Flow]]></Name>
+      <FSPath><![CDATA[Test\1495\1495\538]]></FSPath>
+      <QCPath><![CDATA[Subject\AUTOMATION\Engine\Automation Engine]]></QCPath>
+    </Relation>
+    <Relation>
+      <RelatedId>5189</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[Action1]]></Name>
+      <FSPath><![CDATA[Test\1495\1495\538]]></FSPath>
+      <QCPath><![CDATA[Subject\AUTOMATION\Engine\Automation Engine]]></QCPath>
+    </Relation>
+    <Relation>
+      <RelatedId>5191</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[TEST_Data]]></Name>
+      <FSPath><![CDATA[Test\1495\1495\538]]></FSPath>
+      <QCPath><![CDATA[Subject\AUTOMATION\Engine\Automation Engine]]></QCPath>
+    </Relation>
+  </Owner>
+</Owners>

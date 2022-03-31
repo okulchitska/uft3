@@ -1,0 +1,10 @@
+﻿<Properties>
+  <WatchEntry0 value="bDebugPrint" />
+  <WatchEntry1 value="sParameterCheck" />
+  <WatchEntry2 value="fFrame_GetParamData(1,(mid(sParameterCheck, (instr(1,sParameterCheck,&quot;&lt;&lt;&lt;&quot;) + 3) , (instr((instr(1,sParameterCheck,&quot;&lt;&lt;&lt;&quot;) + 3) ,sParameterCheck,&quot;&gt;&gt;&gt;&quot;))  - (instr(1,sParameterCheck,&quot;&lt;&lt;&lt;&quot;) + 3) ) ),true)" />
+  <WatchEntry3 value="&quot;&lt;&lt;&lt;&quot; &amp; (mid(sParameterCheck, (instr(1,sParameterCheck,&quot;&lt;&lt;&lt;&quot;) + 3) , (instr((instr(1,sParameterCheck,&quot;&lt;&lt;&lt;&quot;) + 3) ,sParameterCheck,&quot;&gt;&gt;&gt;&quot;))  - (instr(1,sParameterCheck,&quot;&lt;&lt;&lt;&quot;) + 3) ) )  &amp; &quot;&gt;&gt;&gt;&quot;" />
+  <WatchEntry4 value="aParam" />
+  <WatchEntry5 value="oTestCaseAttachmentList.count" />
+  <WatchEntry6 value="sTestCaseAttachmentType" />
+  <WatchEntry7 value="ucase(mid(oTestCaseAttachmentList.item( iTestCaseAttachmentLoop).name,instr(instr(1,oTestCaseAttachmentList.item( iTestCaseAttachmentLoop).name ,&quot;_&quot;)+1,oTestCaseAttachmentList.item( iTestCaseAttachmentLoop).name,&quot;_&quot;)+1,3))" />
+</Properties>

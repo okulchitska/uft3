@@ -1,0 +1,119 @@
+
+'********************************************************************************
+'	Oracle Functions
+'       -------------------------
+'
+'   Available Functions:
+'	* VerifyProperty - Verifies the value of a specified property (for all Java test objects)
+'	* OutputProperty - Returns the value of the specified property (for all Java test objects)
+'	* VerifyEnable - Verifies whether a specified object is enabled (for all Java test objects)
+'	* VerifyValue - Verifies the value of a specified object (for JavaCheckBox, JavaEdit, JavaList, JavaRadioButton, JavaStaticText, JavaTree)
+'	* GetValue - Returns the object value (for JavaCheckBox, JavaEdit, JavaList, JavaRadioButton, JavaStaticText, JavaTree)
+'	* SetContext - Sets the context to the test object (for JavaApplet)
+'
+'   Version: QTP8.2 November 2004
+'   ** In order to use the functions in this file, you must also load the "Common.txt" function library file.
+'
+'   ** Do not modify this file. It may be automatically updated by a later version, and then you will lose your changes.
+'********************************************************************************
+
+Option Explicit
+
+' Function SetContext
+' -----------------------
+' Supply default method that returns immediately, to be used in the JavaApplet test object.
+' Returns - True.
+' 
+'@Description Sets the context to the test object
+'@Documentation  Set the context to the <Test object name> <Test object type> before continuing the run.
+Public Function SetContext
+	SetContext= True
+End Function
+
+
+
+
+' *********************************************************************************************
+' *** 			Register the Functions
+' *********************************************************************************************
+
+' Register the "VerifyProperty" Function
+RegisterUserFunc "JavaApplet" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "JavaButton" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "JavaCheckBox" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "JavaDialog" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "JavaEdit" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "JavaInternalFrame" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "JavaList" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "JavaMenu" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "JavaObject" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "JavaRadioButton" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "JavaSlider" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "JavaSpin" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "JavaStaticText" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "JavaTab" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "JavaTable" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "JavaToolbar" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "JavaTree" , "VerifyProperty" , "VerifyProperty"
+RegisterUserFunc "JavaWindow" , "VerifyProperty" , "VerifyProperty"
+
+
+' Register the "OutputProperty" Function
+RegisterUserFunc "JavaApplet" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "JavaButton" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "JavaCheckBox" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "JavaDialog" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "JavaEdit" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "JavaInternalFrame" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "JavaList" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "JavaMenu" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "JavaObject" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "JavaRadioButton" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "JavaSlider" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "JavaSpin" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "JavaStaticText" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "JavaTab" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "JavaTable" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "JavaToolbar" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "JavaTree" , "OutputProperty" , "OutputProperty"
+RegisterUserFunc "JavaWindow" , "OutputProperty" , "OutputProperty"
+
+
+' Register the "VerifyValue" Function
+RegisterUserFunc "JavaCheckBox" , "VerifyValue" , "VerifyValue"
+RegisterUserFunc "JavaEdit" , "VerifyValue" , "VerifyValue"
+RegisterUserFunc "JavaList" , "VerifyValue" , "VerifyValue"
+RegisterUserFunc "JavaRadioButton" , "VerifyValue" , "VerifyValue"
+RegisterUserFunc "JavaStaticText" , "VerifyValue" , "VerifyValue"
+RegisterUserFunc "JavaTree" , "VerifyValue" , "VerifyValue"
+
+' Register the "GetValue" Function
+RegisterUserFunc "JavaCheckBox" , "GetValue" , "GetValueProperty"
+RegisterUserFunc "JavaEdit" , "GetValue" , "GetValueProperty"
+RegisterUserFunc "JavaList" , "GetValue" , "GetValueProperty"
+RegisterUserFunc "JavaRadioButton" , "GetValue" , "GetValueProperty"
+RegisterUserFunc "JavaStaticText" , "GetValue" , "GetValueProperty"
+RegisterUserFunc "JavaTree" , "GetValue" , "GetValueProperty"
+
+' Register the "VerifyEnable" Function
+RegisterUserFunc "JavaApplet" , "VerifyEnable" , "VerifyEnabled"
+RegisterUserFunc "JavaButton" , "VerifyEnable" , "VerifyEnabled"
+RegisterUserFunc "JavaCheckBox" , "VerifyEnable" , "VerifyEnabled"
+RegisterUserFunc "JavaDialog" , "VerifyEnable" , "VerifyEnabled"
+RegisterUserFunc "JavaEdit" , "VerifyEnable" , "VerifyEnabled"
+RegisterUserFunc "JavaInternalFrame" , "VerifyEnable" , "VerifyEnabled"
+RegisterUserFunc "JavaList" , "VerifyEnable" , "VerifyEnabled"
+RegisterUserFunc "JavaMenu" , "VerifyEnable" , "VerifyEnabled"
+RegisterUserFunc "JavaObject" , "VerifyEnable" , "VerifyEnabled"
+RegisterUserFunc "JavaRadioButton" , "VerifyEnable" , "VerifyEnabled"
+RegisterUserFunc "JavaSlider" , "VerifyEnable" , "VerifyEnabled"
+RegisterUserFunc "JavaSpin" , "VerifyEnable" , "VerifyEnabled"
+RegisterUserFunc "JavaStaticText" , "VerifyEnable" , "VerifyEnabled"
+RegisterUserFunc "JavaTab" , "VerifyEnable" , "VerifyEnabled"
+RegisterUserFunc "JavaTable" , "VerifyEnable" , "VerifyEnabled"
+RegisterUserFunc "JavaToolbar" , "VerifyEnable" , "VerifyEnabled"
+RegisterUserFunc "JavaTree" , "VerifyEnable" , "VerifyEnabled"
+RegisterUserFunc "JavaWindow" , "VerifyEnable" , "VerifyEnabled"
+
+' Register the SetContext Function
+RegisterUserFunc "JavaApplet", "SetContext", "SetContext", True
